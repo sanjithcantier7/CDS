@@ -19,8 +19,11 @@
     "noUnusedLocals": true, // Flags unused local variables.
     "noUnusedParameters": true, // Flags unused function parameters.
     "noFallthroughCasesInSwitch": true, // Requires handling all cases in a switch statement.
-    "declaration": true // Generates declaration files for TypeScript.
+    "declaration": true, // Generates declaration files for TypeScript.
+
+    "typeRoots": ["./dist/index.d.ts", "node_modules/@types"]
   },
-  "include": ["src"], // Specifies the directory to include when searching for TypeScript files.
-  "exclude": ["src/**/__docs__", "src/**/__test__"]
+  "include": ["src", "./index.ts"], // Specifies the directory to include when searching for TypeScript files.
+  "exclude": ["src/**/__docs__", "src/**/__test__"],
+  "references": [{ "path": "./tsconfig.node.json" }]
 }
