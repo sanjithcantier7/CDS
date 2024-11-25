@@ -18,17 +18,18 @@ export default defineConfig({
         globals: {
           react: "React",
           "react-dom": "ReactDOM",
+          assetFileNames: "[name].[hash][extname]",
         },
       },
     },
     sourcemap: true,
     emptyOutDir: true,
   },
+  assetsInclude: ["**/*.svg"],
   plugins: [
     react(),
     dts(),
     svgr({
-      exportAsDefault: true,
       svgrOptions: {
         // ...
       },
