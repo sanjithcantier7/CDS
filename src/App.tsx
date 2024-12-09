@@ -1,4 +1,5 @@
 import React from 'react'
+import { TitleBar } from './components'
 
 interface Props {
 
@@ -8,6 +9,11 @@ const App = (props: Props) => {
   return (
     <div>
       CDS
+      <TitleBar version={"MES x.0"}
+        notification
+        info
+        settings
+        moduleOnclick={() => { }} home={false} />
     </div>
   )
 }

@@ -19,7 +19,7 @@ const MesLogo: FC<IMesLogo> = ({ onClick, sx, icon }) => {
       }}
       sx={[sx, { mx: 1 }]}
     >
-      <img src={icon} alt="Logo" />
+      <img src={icon} />
     </Icon>
   );
 };

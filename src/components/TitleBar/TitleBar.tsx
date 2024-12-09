@@ -20,13 +20,13 @@ import CantierIcon from "../../assets/Cantier.svg";
 import MesInfoIcon from "../../assets/MesInfo.svg";
 import NotificationIcon from "../../assets/MesNotification.svg";
 
-export interface ITitleBar {
+interface ITitleBar {
   version: string;
   profilePicture?: ReactNode;
-  notification: boolean;
-  settings: boolean;
-  info: boolean;
-  home: boolean;
+  notification?: boolean;
+  settings?: boolean;
+  info?: boolean;
+  home?: boolean;
   settingsComponent?: ReactNode;
   settingsOnCLick?:
   | React.MouseEventHandler<HTMLAnchorElement>
@@ -109,7 +109,7 @@ const TitleBar: FC<ITitleBar> = ({
   settingsComponent,
   settingsOnCLick,
   settings,
-  info = false,
+  info,
   notification,
   home,
   homeOnClick,
