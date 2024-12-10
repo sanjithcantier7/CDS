@@ -1,7 +1,9 @@
 import {
   AppBar,
+  Icon,
   IconButton,
   Stack,
+  SvgIcon,
   SxProps,
   Theme,
   Typography,
@@ -77,11 +79,11 @@ const CantierIconVersion = (props: any) => {
       style={props.style}
     >
       {/* <CantierLogo /> */}
-      <img src={CantierIcon} style={{ height: "3.6vh" }} />
+      {/* <img src={CantierIcon}  style={{ height: "3.6vh" }} /> */}
+      <CantierIcon />
+      {/* <CantierIcon /> */}
       <Typography
         mt={"0.5vh"}
-        // mt={{ md: "0.5vh", lg: "0.5vh", xl: "0.75vh" }}
-        // fontSize={{ md: "1.2rem", lg: "1rem", xl: "0.6rem" }}
         fontSize={'2vh'}
         fontWeight={600}
         color="#fff"
@@ -145,12 +147,12 @@ const TitleBar: FC<ITitleBar> = ({
               icon={brandlogo}
             />
           )}
-          {info && <MesInfo icon={MesInfoIcon} />}
-          {notification && <MesNotification icon={NotificationIcon} />}
+          {info && <MesInfo icon={<MesInfoIcon />} />}
+          {notification && <MesNotification icon={<NotificationIcon />} />}
           {home && <Home homeOnClick={homeOnClick} />}
           {settings && (
             <MesSettings
-              icon={SettingsIcon}
+              icon={<SettingsIcon />}
               settingsComponent={settingsComponent}
               settingsOnCLick={settingsOnCLick}
             />

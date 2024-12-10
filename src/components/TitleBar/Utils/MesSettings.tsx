@@ -1,10 +1,10 @@
 import { IconButton } from "@mui/material";
-import React, { FC, ReactNode } from "react";
+import React, { ElementType, FC, ReactNode } from "react";
 
 interface ISettings {
   onClick?: React.MouseEvent<MouseEvent> | any;
   sx?: any;
-  icon: string | undefined;
+  icon: any | undefined;
   settingsComponent?: ReactNode | ReactNode[];
   settingsOnCLick?: any;
 }
@@ -23,7 +23,8 @@ const MesSettings: FC<ISettings> = ({
         sx={sx}
         onClick={settingsOnCLick}
       >
-        <img src={icon} style={{ height: "2vh" }} />
+        {/* <img src={icon} style={{ height: "2vh" }} /> */}
+        {icon}
       </IconButton>
       {settingsComponent}
     </>

@@ -23,7 +23,8 @@ const MesModuleButton: FC<IMesModuleButton> = ({ onClick }) => {
       disableRipple
       onClick={onClick}
     >
-      <img src={ModuleIcon} style={{ height: "2.5vh" }} />
+      {/* <img src={ModuleIcon} style={{ height: "2.5vh" }} /> */}
+      <ModuleIcon />
     </IconButton>
   );
 };

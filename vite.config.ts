@@ -30,14 +30,14 @@ export default defineConfig({
     react(),
     dts(),
     svgr({
+      // svgr options: https://react-svgr.com/docs/options/
       svgrOptions: {
-        // ...
-      },
-      esbuildOptions: {
-        // ...
+        exportType: "default",
+        ref: true,
+        svgo: false,
+        titleProp: true,
       },
       include: "**/*.svg",
-      exclude: "",
     }),
   ],
 });
