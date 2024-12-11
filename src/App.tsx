@@ -1,22 +1,16 @@
-import React from 'react'
-import { TitleBar } from './components'
+import React from "react";
+import { SideBar, TitleBar } from "./components";
 import "./index.css";
+import Sample from "./components/Sample/Sample";
 
-interface Props {
+interface Props {}
 
-}
-
-const App = (props: Props) => {
+const App: React.FC<Props> = () => {
   return (
     <div>
-      CDS
-      <TitleBar version={"MES x.0"}
-        notification
-        info
-        settings
-        moduleOnclick={() => { }} home={false} />
+      <Sample />
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;
