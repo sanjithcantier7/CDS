@@ -28,18 +28,17 @@ const StyledDrawer = styled(Drawer)(({ theme, open }) => ({
   },
 }));
 
-interface Props {
+export interface ISideBar {
   open: boolean;
   onClose: () => void;
   onClick: () => void;
   menus: ReactNode;
 }
 
-const SideBar = (props: Props) => {
+const SideBar = (props: ISideBar) => {
   return (
     <StyledDrawer
       variant="permanent"
-      
       anchor="left"
       open={props.open}
       onClose={props.onClose}

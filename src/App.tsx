@@ -1,14 +1,13 @@
 import React from "react";
-import { SideBar, TitleBar } from "./components";
 import "./index.css";
-import Sample from "./components/Sample/Sample";
+import Example from "./components/SideBar/__docs__/Example";
 
 interface Props {}
 
 const App: React.FC<Props> = () => {
   return (
     <div>
-      <Sample />
+      <Example />
     </div>
   );
 };
