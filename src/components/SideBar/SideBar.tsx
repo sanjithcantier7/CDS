@@ -84,13 +84,15 @@ const SideBar = (props: ISideBar) => {
                 </IconButton>
                 <List disablePadding sx={{ p: 0, bgcolor: props.bgColor || "#EAEAEA", }}>
                     {props.open ? props.menus.map((item: IMenuList, index: number) => (
-                        <List key={index}>
+                        // <List key={index}>
+                        <>
                             <ListItem key={item.id} disablePadding>
                                 <ListItemButton
                                     sx={{
                                         color: item.color || "#545454",
                                         bgcolor: item.bgColor || "#EAEAEA",
                                         fontWeight: 700,
+                                        width: '28vh',
                                         "&:hover": { backgroundColor: "#EAEAEA" },
                                         cursor: "pointer",
                                     }}
@@ -98,11 +100,13 @@ const SideBar = (props: ISideBar) => {
                                     disableTouchRipple
                                 >
                                     <ListItemText
+
                                         primary={item.label}
                                         sx={{
                                             ".MuiTypography-root": {
                                                 fontWeight: 800,
                                                 letterSpacing: 0.2,
+                                                width: '28vh',
                                             },
                                         }}
                                     />
@@ -110,19 +114,21 @@ const SideBar = (props: ISideBar) => {
                             </ListItem>
                             {item.childMenus.map((subItem: IChildMenuList, index: number) => (
                                 <ListItemButton
-
                                     onClick={subItem.onClick}
                                     sx={{
+                                        // border: '1px solid red',
+                                        width: '27vh',
+                                        lineHeight: "1.8vh",
                                         color: subItem.color || "#545454",
                                         bgcolor: subItem.bgColor || "#EAEAEA",
                                         ".MuiTypography-root": {
                                             ":hover": {
-                                                fontWeight: 800,
+                                                fontWeight: 600,
                                             },
                                             fontWeight: subItem.isActive ? 800 : 500,
 
                                         },
-                                        "&:hover": { color: "#002856" },
+                                        "&:hover": { color: "#002856", },
                                         "&:active": {
                                             bgcolor: subItem.isActive ? "#DFDFDF" : "#EAEAEA",
                                             color: subItem.isActive
@@ -138,7 +144,8 @@ const SideBar = (props: ISideBar) => {
                                     <ListItemText primary={subItem.label} />
                                 </ListItemButton>
                             ))}
-                        </List>
+                        </>
+                        // </List>
                     )) : props.menus.map((iconMenu: IMenuList) =>
                         <>
                             <div style={{
