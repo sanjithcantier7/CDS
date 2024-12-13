@@ -17,7 +17,7 @@ const StyledDrawer = styled(Drawer)(({ theme, open }) => ({
     "& .MuiDrawer-paper": {
         borderColor: "#EAEAEA",
         width: open ? drawerWidth : shrunkDrawerWidth,
-        // overflow: "hidden",
+        overflow: !open ? "visible" : "auto",
         backgroundColor: "#EAEAEA",
         top: "5vh",
         transition: theme.transitions.create("width", {
@@ -66,7 +66,7 @@ const SideBar = (props: ISideBar) => {
             open={props.open}
             onClose={props.onClose}
         >
-            <Stack sx={{ alignItem: "flex-start", backgroundColor: "#c0c0c0" }}>
+            <Stack sx={{ alignItem: "flex-start", backgroundColor: "#c0c0c0", width: "5vh" }}>
                 <IconButton
                     sx={{
                         backgroundColor: "#c0c0c0",
@@ -75,13 +75,14 @@ const SideBar = (props: ISideBar) => {
                         borderRadius: 0,
                         height: "5vh",
                         width: "5vh",
+                        zIndex: 0,
                     }}
                     disableRipple
                     onClick={props.onClick}
                 >
                     <SideBarIcon />
                 </IconButton>
-                <List disablePadding sx={{ p: 0, bgcolor: props.bgColor || "#EAEAEA" }}>
+                <List disablePadding sx={{ p: 0, bgcolor: props.bgColor || "#EAEAEA", }}>
                     {props.open ? props.menus.map((item: IMenuList, index: number) => (
                         <List key={index}>
                             <ListItem key={item.id} disablePadding>
@@ -109,7 +110,7 @@ const SideBar = (props: ISideBar) => {
                             </ListItem>
                             {item.childMenus.map((subItem: IChildMenuList, index: number) => (
                                 <ListItemButton
-                                    
+
                                     onClick={subItem.onClick}
                                     sx={{
                                         color: subItem.color || "#545454",
@@ -119,7 +120,7 @@ const SideBar = (props: ISideBar) => {
                                                 fontWeight: 800,
                                             },
                                             fontWeight: subItem.isActive ? 800 : 500,
-                                            letterSpacing: 0.2
+
                                         },
                                         "&:hover": { color: "#002856" },
                                         "&:active": {
@@ -138,7 +139,6 @@ const SideBar = (props: ISideBar) => {
                                 </ListItemButton>
                             ))}
                         </List>
-
                     )) : props.menus.map((iconMenu: IMenuList) =>
                         <>
                             <div style={{
