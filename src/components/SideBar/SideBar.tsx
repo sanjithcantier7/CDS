@@ -66,7 +66,7 @@ const SideBar = (props: ISideBar) => {
             open={props.open}
             onClose={props.onClose}
         >
-            <Stack sx={{ alignItem: "flex-start", backgroundColor: "#c0c0c0", width: "5vh" }}>
+            <Stack sx={{ alignItem: "flex-start", backgroundColor: "#c0c0c0", width: "5vh", p: 0 }}>
                 <IconButton
                     sx={{
                         backgroundColor: "#c0c0c0",
@@ -76,6 +76,7 @@ const SideBar = (props: ISideBar) => {
                         height: "5vh",
                         width: "5vh",
                         zIndex: 0,
+                        p: 0
                     }}
                     disableRipple
                     onClick={props.onClick}
@@ -86,10 +87,11 @@ const SideBar = (props: ISideBar) => {
                     {props.open ? props.menus.map((item: IMenuList, index: number) => (
                         // <List key={index}>
                         <>
-                            <ListItem key={item.id} disablePadding>
+                            <ListItem key={item.id} disablePadding sx={{ width: '28vh', p: 0, ml: '1.7vh' }}>
                                 <ListItemButton
                                     sx={{
                                         color: item.color || "#545454",
+                                        p: 0,
                                         bgcolor: item.bgColor || "#EAEAEA",
                                         fontWeight: 700,
                                         width: '28vh',
@@ -100,13 +102,16 @@ const SideBar = (props: ISideBar) => {
                                     disableTouchRipple
                                 >
                                     <ListItemText
-
                                         primary={item.label}
                                         sx={{
                                             ".MuiTypography-root": {
                                                 fontWeight: 800,
-                                                letterSpacing: 0.2,
-                                                width: '28vh',
+                                                fontSize: '2vh',
+                                                // letterSpacing: 0.2,
+                                                width: '27vh',
+                                                whiteSpace: "nowrap",        // Prevent wrapping
+                                                overflow: "hidden",          // Handle overflow
+                                                textOverflow: "ellipsis",    // Add ellipsis for long text
                                             },
                                         }}
                                     />
@@ -116,18 +121,29 @@ const SideBar = (props: ISideBar) => {
                                 <ListItemButton
                                     onClick={subItem.onClick}
                                     sx={{
+                                        p: 0,
+                                        pl: '2vh',
                                         // border: '1px solid red',
-                                        width: '27vh',
-                                        lineHeight: "1.8vh",
+                                        height: '4vh',
+                                        width: '28vh',
+                                        // lineHeight: "1.8vh",
                                         color: subItem.color || "#545454",
                                         bgcolor: subItem.bgColor || "#EAEAEA",
-                                        ".MuiTypography-root": {
-                                            ":hover": {
-                                                fontWeight: 600,
-                                            },
-                                            fontWeight: subItem.isActive ? 800 : 500,
-
-                                        },
+                                        display: 'flex',
+                                        flexDirection: 'row',
+                                        justifyContent: "flex-start",
+                                        alignItems: "center",
+                                        alignContent: 'flex-start',
+                                        // ".MuiTypography-root": {
+                                        //     ":hover": {
+                                        //         fontWeight: 600,
+                                        //     },
+                                        //     fontWeight: subItem.isActive ? 800 : 500,
+                                        //     whiteSpace: "nowrap",        // Prevent wrapping
+                                        //     overflow: "hidden",          // Handle overflow
+                                        //     textOverflow: "ellipsis",    // Add ellipsis for long text
+                                        //     fontSize: '1.6vh',
+                                        // },
                                         "&:hover": { color: "#002856", },
                                         "&:active": {
                                             bgcolor: subItem.isActive ? "#DFDFDF" : "#EAEAEA",
@@ -137,11 +153,26 @@ const SideBar = (props: ISideBar) => {
                                         },
                                         cursor: "pointer",
                                     }}
+
                                     disableRipple
                                     disableTouchRipple
                                 >
-                                    <ListItemIcon>{subItem.icon || <DefaultIcon />}</ListItemIcon>
-                                    <ListItemText primary={subItem.label} />
+                                    <ListItemIcon sx={{ minWidth: '4vh' }}>{subItem.icon || <DefaultIcon />}</ListItemIcon>
+                                    <ListItemText sx={{
+                                        // border: '1px solid green',
+                                        width: '22vh',
+                                        ".MuiTypography-root": {
+                                            ":hover": {
+                                                fontWeight: 600,
+                                            },
+                                            fontWeight: subItem.isActive ? 800 : 500,
+                                            whiteSpace: "nowrap",        // Prevent wrapping
+                                            overflow: "hidden",          // Handle overflow
+                                            textOverflow: "ellipsis",    // Add ellipsis for long text
+                                            fontSize: '1.6vh',
+                                        },
+
+                                    }} primary={subItem.label} />
                                 </ListItemButton>
                             ))}
                         </>
