@@ -119,6 +119,7 @@ const SideBar = (props: ISideBar) => {
                             </ListItem>
                             {item.childMenus.map((subItem: IChildMenuList, index: number) => (
                                 <ListItemButton
+                                    key={index + '-' + 'sub-list-items'}
                                     onClick={subItem.onClick}
                                     sx={{
                                         p: 0,
