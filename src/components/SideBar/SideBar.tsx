@@ -1,6 +1,6 @@
 import { Box, Divider, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Stack, styled } from "@mui/material";
 import SideBarIcon from "./toggleIcon.svg";
-import { ReactNode } from "react";
+import React, { ReactNode } from "react";
 import DefaultIcon from "./defaultMenuIcon.svg"
 
 const drawerWidth = "28vh";
@@ -86,9 +86,10 @@ const SideBar = (props: ISideBar) => {
                 <List disablePadding sx={{ p: 0, bgcolor: props.bgColor || "#EAEAEA", }}>
                     {props.open ? props.menus.map((item: IMenuList, index: number) => (
                         // <List key={index}>
-                        <>
+                        <React.Fragment key={index+'-list-drawer'}>
                             <ListItem key={item.id} disablePadding sx={{ width: '28vh', p: 0, ml: '1.7vh' }}>
                                 <ListItemButton
+                                    key={index + '-' + 'title-list-items-btn'}
                                     sx={{
                                         color: item.color || "#545454",
                                         p: 0,
@@ -102,11 +103,12 @@ const SideBar = (props: ISideBar) => {
                                     disableTouchRipple
                                 >
                                     <ListItemText
+                                        key={index + '-' + 'title-list-items'}
                                         primary={item.label}
                                         sx={{
                                             ".MuiTypography-root": {
                                                 fontWeight: 800,
-                                                fontSize: '2vh',
+                                                fontSize: '1.8vh',
                                                 // letterSpacing: 0.2,
                                                 width: '27vh',
                                                 whiteSpace: "nowrap",        // Prevent wrapping
@@ -158,8 +160,8 @@ const SideBar = (props: ISideBar) => {
                                     disableRipple
                                     disableTouchRipple
                                 >
-                                    <ListItemIcon sx={{ minWidth: '4vh' }}>{subItem.icon || <DefaultIcon />}</ListItemIcon>
-                                    <ListItemText sx={{
+                                    <ListItemIcon key={index + '-' + 'sub-list-items-icon'} sx={{ minWidth: '4vh' }}>{subItem.icon || <DefaultIcon />}</ListItemIcon>
+                                    <ListItemText key={index + '-' + 'sub-list-items-label'} sx={{
                                         // border: '1px solid green',
                                         width: '22vh',
                                         ".MuiTypography-root": {
@@ -176,7 +178,7 @@ const SideBar = (props: ISideBar) => {
                                     }} primary={subItem.label} />
                                 </ListItemButton>
                             ))}
-                        </>
+                        </React.Fragment>
                         // </List>
                     )) : props.menus.map((iconMenu: IMenuList) =>
                         <>
