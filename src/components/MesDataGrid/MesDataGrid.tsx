@@ -220,7 +220,7 @@ const MesData: React.FC<DataGridProps> = ({
             checkboxSelection={checkboxSelection}
             initialState={
                 { // Initialize grid data parameters
-                    pagination: { paginationModel: { pageSize: 10 } }, // Initialize pagination to display ten initialRows per page
+                    pagination: { paginationModel: { pageSize: 5 } }, // Initialize pagination to display ten initialRows per page
                     sorting: {
                         sortModel: [
                             {
@@ -245,7 +245,7 @@ const MesData: React.FC<DataGridProps> = ({
                 columnSortedDescendingIcon: ColumnSortingSelectedIcon as unknown as React.JSXElementConstructor<any>,
                 baseCheckbox: MesCustomCheckBox,
             }}
-            pageSizeOptions={otherProps.pageSizeOptions || [10, 15, 25]}
+            pageSizeOptions={otherProps.pageSizeOptions || [5, 10, 15, 25]}
             {...otherProps}
         />
     );
@@ -290,10 +290,10 @@ const customStyleSx = {
         textTransform: "uppercase",
     },
     // paginator size
-    // ".MuiDataGrid-footerContainer": {
-    //     minHeight: "43px",
-    //     maxHeight: "43px",
-    // },
+    ".MuiDataGrid-footerContainer": {
+        // minHeight: "43px",
+        // maxHeight: "43px",
+    },
     // cell selection
     "&.MuiDataGrid-root .MuiDataGrid-columnHeader:focus, &.MuiDataGrid-root .MuiDataGrid-cell:focus":
     {

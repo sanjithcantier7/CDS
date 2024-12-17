@@ -5,7 +5,7 @@ import { GridColDef } from '@mui/x-data-grid';
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
     { field: 'name', headerName: 'Name', width: 150 },
-    { field: 'age', headerName: 'Age', type: 'number', width: 110 },
+    { field: 'age', headerName: 'Age', width: 110, align: 'center', headerAlign: "center" },
 ];
 
 const rows = [
