@@ -44,7 +44,7 @@ interface ITopBar {
   leftComponents?: ReactNode | JSX.Element | ReactNode[] | JSX.Element[];
   RightComponents?: ReactNode | JSX.Element | ReactNode[] | JSX.Element[];
 }
-
+                                                                                                                    
 const TopBar: FC<ITopBar> = ({
   leftComponents,
   RightComponents,

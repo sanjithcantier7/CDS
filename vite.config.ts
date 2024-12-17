@@ -34,7 +34,7 @@ export default defineConfig({
       svgrOptions: {
         exportType: "default",
         ref: true,
-        svgo: false,
+        svgo: true,
         titleProp: true,
       },
       include: "**/*.svg",
