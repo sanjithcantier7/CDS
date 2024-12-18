@@ -65,6 +65,7 @@ const SideBar = (props: ISideBar) => {
             anchor="left"
             open={props.open}
             onClose={props.onClose}
+            key={'drawer-1'}
         >
             <Stack sx={{ alignItem: "flex-start", backgroundColor: "#c0c0c0", width: "5vh", p: 0 }}>
                 <IconButton
@@ -86,8 +87,8 @@ const SideBar = (props: ISideBar) => {
                 <List disablePadding sx={{ p: 0, bgcolor: props.bgColor || "#EAEAEA", }}>
                     {props.open ? props.menus.map((item: IMenuList, index: number) => (
                         // <List key={index}>
-                        <React.Fragment key={index+'-list-drawer'}>
-                            <ListItem key={item.id} disablePadding sx={{ width: '28vh', p: 0, ml: '1.7vh' }}>
+                        <React.Fragment key={index + '-list-drawer'}>
+                            <ListItem disablePadding sx={{ width: '28vh', p: 0, ml: '1.7vh' }} key={index + '-list-item'}>
                                 <ListItemButton
                                     key={index + '-' + 'title-list-items-btn'}
                                     sx={{
@@ -103,7 +104,7 @@ const SideBar = (props: ISideBar) => {
                                     disableTouchRipple
                                 >
                                     <ListItemText
-                                        key={index + '-' + 'title-list-items'}
+                                        key={index + '-' + 'title-list-item-text'}
                                         primary={item.label}
                                         sx={{
                                             ".MuiTypography-root": {
@@ -180,8 +181,8 @@ const SideBar = (props: ISideBar) => {
                             ))}
                         </React.Fragment>
                         // </List>
-                    )) : props.menus.map((iconMenu: IMenuList) =>
-                        <>
+                    )) : props.menus.map((iconMenu: IMenuList, index: number) =>
+                        <React.Fragment key={index + '-list-sub-list-items'}>
                             <div style={{
                                 display: 'flex',
                                 flexDirection: "row",
@@ -191,7 +192,7 @@ const SideBar = (props: ISideBar) => {
                                 justifyContent: "center",
 
                             }}><DefaultIcon /></div>
-                            {iconMenu.childMenus.map((item: IChildMenuList) =>
+                            {iconMenu.childMenus.map((item: IChildMenuList, index: number) =>
                                 <div style={{
                                     display: 'flex',
                                     flexDirection: "row",
@@ -199,10 +200,9 @@ const SideBar = (props: ISideBar) => {
                                     width: '5vh',
                                     height: "5vh",
                                     justifyContent: "center",
-
-                                }}>{item.icon || <DefaultIcon />}</div>
+                                }} key={index + '-list-icon-sub-lis'}>{item.icon || <DefaultIcon />}</div>
                             )}
-                        </>
+                        </React.Fragment>
                     )}
                 </List>
             </Stack>
