@@ -14,111 +14,6 @@ import PrevIcon from "./assets/PrevIcon.svg"
 import PrevIconDisabled from "./assets/PrevIconDisabled.svg"
 import './styles.css'
 
-// Interface defining the props for MesData
-// interface MesDataProps {
-//     columns: GridColDef[];
-//     rows: any[];
-//     apiRef?: React.MutableRefObject<GridApi>;
-//     'aria-label'?: string;
-//     'aria-labelledby'?: string;
-//     autoHeight?: boolean;
-//     autoPageSize?: boolean;
-//     autosizeOnMount?: boolean;
-//     autosizeOptions?: object;
-//     cellModesModel?: GridCellModesModel;
-//     checkboxSelection?: boolean;
-//     classes?: Record<string, string>;
-//     clipboardCopyCellDelimiter?: string;
-//     columnBufferPx?: number;
-//     columnGroupHeaderHeight?: number;
-//     columnHeaderHeight?: number;
-//     columnVisibilityModel?: GridColumnVisibilityModel;
-//     density?: GridDensity;
-//     disableAutosize?: boolean;
-//     disableColumnFilter?: boolean;
-//     disableColumnMenu?: boolean;
-//     disableColumnResize?: boolean;
-//     disableColumnSelector?: boolean;
-//     disableColumnSorting?: boolean;
-//     disableDensitySelector?: boolean;
-//     disableEval?: boolean;
-//     disableMultipleRowSelection?: boolean;
-//     disableRowSelectionOnClick?: boolean;
-//     disableVirtualization?: boolean;
-//     editMode?: 'cell' | 'row';
-//     estimatedRowCount?: number;
-//     experimentalFeatures?: object;
-//     filterDebounceMs?: number;
-//     filterMode?: 'client' | 'server';
-//     filterModel?: GridFilterModel;
-//     getCellClassName?: (params: GridCellParams) => string;
-//     getDetailPanelContent?: (row: GridRowParams) => React.ReactNode;
-//     getEstimatedRowHeight?: (params: GridRowHeightParams) => number;
-//     getRowClassName?: (params: GridRowParams) => string;
-//     getRowHeight?: (params: GridRowHeightParams) => number | null;
-//     getRowId?: (row: any) => any;
-//     getRowSpacing?: (params: GridRowSpacingParams) => GridRowSpacing;
-//     hideFooter?: boolean;
-//     hideFooterPagination?: boolean;
-//     hideFooterSelectedRowCount?: boolean;
-//     ignoreDiacritics?: boolean;
-//     ignoreValueFormatterDuringExport?: boolean;
-//     indeterminateCheckboxAction?: 'select' | 'deselect' | undefined;
-//     initialState?: GridInitialState;
-//     isCellEditable?: (params: GridCellParams) => boolean;
-//     isRowSelectable?: (params: GridRowParams) => boolean;
-//     keepNonExistentRowsSelected?: boolean;
-//     loading?: boolean;
-//     localeText?: Partial<GridLocaleText>;
-//     logger?: any;
-//     logLevel?: 'debug' | 'info' | 'warn' | 'error';
-//     nonce?: string;
-//     onCellClick?: (params: GridCellParams, event: React.MouseEvent) => void;
-//     onCellDoubleClick?: (params: GridCellParams, event: React.MouseEvent) => void;
-//     onCellEditStart?: (params: GridCellParams, event: React.SyntheticEvent) => void;
-//     onCellEditStop?: (params: GridCellParams, event: React.SyntheticEvent) => void;
-//     onCellKeyDown?: (params: GridCellParams, event: React.KeyboardEvent) => void;
-//     onCellModesModelChange?: (newModel: GridCellModesModel, details: GridCallbackDetails) => void;
-//     onClipboardCopy?: (value: string) => void;
-//     onColumnHeaderClick?: (params: GridColDef, event: React.MouseEvent) => void;
-//     onColumnOrderChange?: (columnField: string, targetIndex: number) => void;
-//     onColumnVisibilityModelChange?: (model: GridColumnVisibilityModel) => void;
-//     onDensityChange?: (density: GridDensity) => void;
-//     onFilterModelChange?: (model: GridFilterModel) => void;
-//     onPaginationMetaChange?: (meta: any) => void;
-//     onPaginationModelChange?: (model: GridPaginationModel) => void;
-//     onPreferencePanelClose?: () => void;
-//     onPreferencePanelOpen?: () => void;
-//     onProcessRowUpdateError?: (error: any) => void;
-//     onRowClick?: (params: GridRowParams, event: React.MouseEvent) => void;
-//     onRowModesModelChange?: (newModel: GridRowModesModel, details: GridCallbackDetails) => void;
-//     onRowSelectionModelChange?: (selectionModel: GridRowSelectionModel) => void;
-//     onSortModelChange?: (model: GridSortModel) => void;
-//     paginationMeta?: any;
-//     paginationMode?: 'client' | 'server';
-//     paginationModel?: GridPaginationModel;
-//     processRowUpdate?: (updatedRow: any, originalRow: any) => any;
-//     resizeThrottleMs?: number;
-//     rowBufferPx?: number;
-//     rowCount?: number;
-//     rowHeight?: number;
-//     rowModesModel?: GridRowModesModel;
-//     rowSelection?: boolean;
-//     rowSelectionModel?: GridRowSelectionModel;
-//     rowSpacingType?: 'border' | 'margin';
-//     scrollbarSize?: number;
-//     showCellVerticalBorder?: boolean;
-//     showColumnVerticalBorder?: boolean;
-//     slotProps?: object;
-//     slots?: GridSlotsComponent;
-//     sortingMode?: 'client' | 'server';
-//     sortingOrder?: ('asc' | 'desc')[];
-//     sortModel?: GridSortModel;
-//     sx?: SxProps | any;
-//     unstable_rowSpanning?: boolean;
-//     virtualizeColumnsWithAutoRowHeight?: boolean;
-// }
-
 
 function MesGridFooter() {
     const apiRef = useGridApiContext();
@@ -140,7 +35,7 @@ function MesGridFooter() {
                 justifyContent: "space-between",
                 alignItems: "center",
                 height: "5vh",
-                backgroundColor: "#f5f5f5", // Customize background
+                backgroundColor: "#FFF", // Customize background
                 padding: "0 16px",
             }}
         >

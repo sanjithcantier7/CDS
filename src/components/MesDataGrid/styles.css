@@ -2,5 +2,8 @@
   background-color: #fff !important;
 }
 .MuiDataGrid-root {
-  border: none !important;
+  /* border: none !important; */
+  border-style: unset !important;
+  box-shadow: inset;
+  /* box-shadow: "0px 2px 5px 0px rgba(89, 96, 120, 0.10), 0px 0px 0px 1px rgba(70, 79, 96, 0.16), 0px 1px 1px 0px rgba(0, 0, 0, 0.10)" !important; */
 }
