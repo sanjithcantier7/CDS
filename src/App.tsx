@@ -2,6 +2,7 @@ import React from "react";
 import "./index.css";
 import SideBar from "./components/SideBar/__docs__/Example";
 import DataGrid from "./components/MesDataGrid/__docs__/Example"
+import TextFieldComponent from "./components/TextField/__docs__/Example"
 import { Stack, TitleBar, TopBar } from "./components";
 import Example from "./components/Dialogue/__docs__/Example";
 import FilterComponent from "./components/MesDataGridFilter/__docs__/Example"
@@ -16,8 +17,9 @@ const App: React.FC<Props> = () => {
         notification
         info
         settings
-      // moduleOnclick={handleModuleClick}
+      // moduleOnclick={handleModuleClick}K
       />
+
       <TopBar
         open={false}
       // leftComponents={ }
@@ -36,6 +38,8 @@ const App: React.FC<Props> = () => {
           {/* Dialogue Component */}
           <h2>Dialogue Component</h2>
           <Example />
+          <h2>TextField</h2>
+          <TextFieldComponent />
         </Stack>
       </div>
     </div>
