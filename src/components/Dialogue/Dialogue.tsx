@@ -37,8 +37,8 @@ const Dialogue: FC<IDialogue> = (props: IDialogue) => {
                         m: 1,
                     }}
                 >
-                    <Box
-                        sx={{
+                    <div
+                        style={{
                             width: "6.5vh",
                             height: "6.5vh",
                             borderRadius: "50%",
@@ -46,12 +46,14 @@ const Dialogue: FC<IDialogue> = (props: IDialogue) => {
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "center",
+                            border: '1px solid red',
                             alignItems: "center",
                         }}
+
                     >
                         {/* <img src={props.icon || ImageNA} style={{ height: "3.5vh" }} /> */}
                         {props.icon || <ImageNA />}
-                    </Box>
+                    </div>
                     <Stack
                         sx={{
                             alignItems: "flex-start",
