@@ -4,10 +4,12 @@ import styled from 'styled-components';
 import FilterIcon from "./assets/FilterIcon.svg"
 
 const StlyedIconButton = styled(IconButton)({
-    width: "4vh",
-    height: "3vh",
+    // width: "4vh",
+    // height: "3vh",
+    width: "40px",
+    height: "30px",
     //   border: "1px solid red",
-    borderRadius: "0.6vh",
+    borderRadius: "6px",
 });
 
 
@@ -35,7 +37,8 @@ const MesDataGridFilter: FC<IMesDataGridFilter> = (props: IMesDataGridFilter) =>
                         handleClick
                     }
                     sx={{
-                        p: "0.8vh 1.2vh",
+                        // p: "0.8vh 1.2vh",
+                        p: "0.8px 1.2px",
                         mt: -0.5,
                         borderRadius: "0.6vh",
                         background: "#FFF",

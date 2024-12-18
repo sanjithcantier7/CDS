@@ -230,7 +230,7 @@ const CustomToolbar: React.FC<ICustomToolbarProps> = ({ filter = false, filterCo
                     // minWidth: "250px",
                     ".MuiInputBase-root": {
                         height: '30px',
-                        fontSize: '1.5vh'
+                        fontSize: '20'
                     }
                 }}
             />
