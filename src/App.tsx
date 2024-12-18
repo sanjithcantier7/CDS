@@ -4,6 +4,7 @@ import SideBar from "./components/SideBar/__docs__/Example";
 import DataGrid from "./components/MesDataGrid/__docs__/Example"
 import { Stack, TitleBar, TopBar } from "./components";
 import Example from "./components/Dialogue/__docs__/Example";
+import FilterComponent from "./components/MesDataGridFilter/__docs__/Example"
 
 interface Props { }
 
@@ -30,6 +31,8 @@ const App: React.FC<Props> = () => {
           {/* Render Other components here */}
           <h2>MesDataGrid Component</h2>
           <DataGrid />
+          <h2>MesDataGrid Filter</h2>
+          <FilterComponent />
           {/* Dialogue Component */}
           <h2>Dialogue Component</h2>
           <Example />

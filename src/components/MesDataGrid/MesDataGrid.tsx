@@ -1,7 +1,7 @@
-import React from 'react';
-import { DataGrid, DataGridProps, GridApi, GridColumnVisibilityModel, GridFooterContainer, GridInitialState, GridPagination, GridPanelFooter, gridPageCountSelector, gridPageSelector, gridPageSizeSelector, gridPaginationModelSelector, gridRowCountSelector, useGridApiContext, useGridSelector } from '@mui/x-data-grid';
-import { GridRowModesModel, GridCellModesModel, GridFilterModel, GridSortModel, GridCellParams, GridCallbackDetails, GridColDef, GridDensity, GridPaginationModel, GridRowParams, GridRowSelectionModel, GridSlotsComponent, GridRowHeightParams, GridLocaleText, GridRowSpacingParams, GridRowSpacing } from '@mui/x-data-grid/models';
-import { Checkbox, IconButton, SxProps } from '@mui/material';
+import React, { ReactNode } from 'react';
+import { DataGrid, DataGridProps, GridApi, GridColumnVisibilityModel, GridFooterContainer, GridInitialState, GridPagination, GridPanelFooter, GridToolbarFilterButton, GridToolbarQuickFilter, gridPageCountSelector, gridPageSelector, gridPageSizeSelector, gridPaginationModelSelector, gridRowCountSelector, useGridApiContext, useGridSelector } from '@mui/x-data-grid';
+import { GridRowModesModel, GridCellModesModel, GridFilterModel, GridSortModel, GridCellParams, GridCallbackDetails, GridColDef, GridDensity, GridPaginationModel, GridRowParams, GridRowSelectionModel, GridSlotsComponent, GridRowHeightParams, GridLocaleText, GridRowSpacingParams, GridRowSpacing, GridValidRowModel } from '@mui/x-data-grid/models';
+import { Box, Checkbox, IconButton, SxProps } from '@mui/material';
 import FilterIcon from './assets/FilterIconAlt.svg';
 import ColumnSortingSelectedAltIcon from './assets/ColumnSortingSelectedAltIcon.svg';
 import ColumnSortingSelectedIcon from './assets/ColumnSortingSelectedIcon.svg';
@@ -12,6 +12,7 @@ import NextIcon from "./assets/nextIcon.svg"
 import NextIconDisabled from "./assets/nextIconDisabled.svg"
 import PrevIcon from "./assets/PrevIcon.svg"
 import PrevIconDisabled from "./assets/PrevIconDisabled.svg"
+import './styles.css'
 
 // Interface defining the props for MesData
 // interface MesDataProps {
@@ -201,7 +202,52 @@ function MesCustomCheckBox(props: any) {
     />;
 }
 
-const MesData: React.FC<DataGridProps> = ({
+interface ICustomToolbarProps {
+    filter?: boolean;
+    filterComponent?: React.ReactNode;
+}
+
+const CustomToolbar: React.FC<ICustomToolbarProps> = ({ filter = false, filterComponent }) => {
+    return (
+        <Box
+            sx={{
+                p: 1, // Add padding
+                display: "flex",
+                justifyContent: "flex-start",
+                alignItems: "center",
+                gap: 1,
+                backgroundColor: "#f5f5f5", // Optional: Custom background color
+            }}
+        >
+            {filter && filterComponent}
+            {/* Quick Filter for search */}
+            <GridToolbarQuickFilter
+                variant='outlined'
+                placeholder="Search..."
+                size="small"
+                sx={{
+                    // padding: "0 8px",
+                    // minWidth: "250px",
+                    ".MuiInputBase-root": {
+                        height: '30px',
+                        fontSize: '1.5vh'
+                    }
+                }}
+            />
+        </Box>
+    );
+};
+
+
+
+export interface IMesDataGridProps<R extends GridValidRowModel = any>
+    extends DataGridProps<R> {
+    // Add custom properties if needed
+    filter?: boolean,
+    filterComponent?: ReactNode,
+}
+
+const MesData: React.FC<IMesDataGridProps> = ({
     columns,
     rows,
     apiRef,
@@ -209,6 +255,8 @@ const MesData: React.FC<DataGridProps> = ({
     checkboxSelection = false,
     hideFooter = false,
     sx,
+    filter,
+    filterComponent,
     ...otherProps
 }) => {
     return (
@@ -238,13 +286,15 @@ const MesData: React.FC<DataGridProps> = ({
             columnHeaderHeight={otherProps.columnHeaderHeight || 40}
             slots={{
                 ...otherProps.slots,
-                // toolbar: MesGridTableDefaultToolbar, // Use a custom toolbar instead of the default toolbar
+                // toolbar: <CustomToolbar filter={filter} filterComponent={filterComponent} /> as unknown as React.JSXElementConstructor<any>, // Use a custom toolbar instead of the default toolbar
+                toolbar: (props) => <CustomToolbar filter={filter} filterComponent={filterComponent || <div>Toolbar Filter Component</div>} />,
                 footer: MesGridFooter, // Use a custom footer instead of the default footer
                 openFilterButtonIcon: FilterIcon as unknown as React.JSXElementConstructor<any>, // Change the icon of Filter Button in the Toolbar
                 columnSortedAscendingIcon: ColumnSortingSelectedAltIcon as unknown as React.JSXElementConstructor<any>,
                 columnSortedDescendingIcon: ColumnSortingSelectedIcon as unknown as React.JSXElementConstructor<any>,
                 baseCheckbox: MesCustomCheckBox,
             }}
+
             pageSizeOptions={otherProps.pageSizeOptions || [5, 10, 15, 25]}
             {...otherProps}
         />

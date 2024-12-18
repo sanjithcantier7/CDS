@@ -6,7 +6,7 @@ const Example = () => {
     return (
         <div>
             <button onClick={() => setOpen(true)}>Open</button>
-            <Dialogue open={open} />
+            <Dialogue open={open} label={undefined} message={undefined} onClickClose={()=>setOpen(false)} onClose={()=>setOpen(false)}/>
         </div>
     )
 }

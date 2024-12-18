@@ -10,9 +10,10 @@ interface IDialogue {
         event: {},
         reason: "backdropClick" | "escapeKeyDown"
     ) => void | undefined;
-    label?: string | undefined;
-    message?: string | undefined;
+    label: string | undefined;
+    message: string | undefined;
     onClickClose?: React.MouseEventHandler<HTMLButtonElement> | undefined;
+    iconBgColor?: string | undefined;
     icon?: string | undefined;
 }
 
@@ -38,17 +39,18 @@ const Dialogue: FC<IDialogue> = (props: IDialogue) => {
                 >
                     <Box
                         sx={{
-                            width: "6vh",
-                            height: "6vh",
+                            width: "6.5vh",
+                            height: "6.5vh",
                             borderRadius: "50%",
-                            backgroundColor: "rgba(67, 118, 175, 0.35)",
+                            backgroundColor: props.iconBgColor || "#F15D22",
                             display: "flex",
                             flexDirection: "row",
                             justifyContent: "center",
                             alignItems: "center",
                         }}
                     >
-                        <img src={props.icon || ImageNA} style={{ height: "3.5vh" }} />
+                        {/* <img src={props.icon || ImageNA} style={{ height: "3.5vh" }} /> */}
+                        {props.icon || <ImageNA />}
                     </Box>
                     <Stack
                         sx={{

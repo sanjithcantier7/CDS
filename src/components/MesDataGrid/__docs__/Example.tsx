@@ -1,6 +1,7 @@
 import React from 'react'
 import MesDataGrid from '../MesDataGrid'
 import { GridColDef } from '@mui/x-data-grid';
+import MesDataGridFilter from '../../MesDataGridFilter/MesDataGridFilter';
 
 const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
@@ -40,10 +41,14 @@ const rows = [
     // { id: 29, name: 'Jack Daniels', age: 42 },
     // { id: 30, name: 'John Doe', age: 35 },
 ];
+
+
 const Example = () => {
     return (
         <div style={{ display: "flex", flexDirection: 'row', width: '80vw', height: '50vh' }}>
-            <MesDataGrid columns={columns} rows={rows} checkboxSelection />
+            <MesDataGrid columns={columns} rows={rows} checkboxSelection
+                filter filterComponent={<MesDataGridFilter popupComponent={<h2>Hello world</h2>} />}
+            />
         </div>
     )
 }
