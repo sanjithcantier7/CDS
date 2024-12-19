@@ -1,13 +1,13 @@
 import React from "react";
 import "./index.css";
 import SideBar from "./components/SideBar/__docs__/Example";
-import DataGrid from "./components/MesDataGrid/__docs__/Example"
-import TextFieldComponent from "./components/TextField/__docs__/Example"
+import DataGrid from "./components/MesDataGrid/__docs__/Example";
+import TextFieldComponent from "./components/TextField/__docs__/Example";
 import { Stack, TitleBar, TopBar } from "./components";
 import Example from "./components/Dialogue/__docs__/Example";
-import FilterComponent from "./components/MesDataGridFilter/__docs__/Example"
+import FilterComponent from "./components/MesDataGridFilter/__docs__/Example";
 
-interface Props { }
+interface Props {}
 
 const App: React.FC<Props> = () => {
   return (
@@ -17,17 +17,29 @@ const App: React.FC<Props> = () => {
         notification
         info
         settings
-      // moduleOnclick={handleModuleClick}K
+        // moduleOnclick={handleModuleClick}K
       />
 
       <TopBar
         open={false}
-      // leftComponents={ }
-      // RightComponents={
+        // leftComponents={ }
+        // RightComponents={
 
-      // }
+        // }
       />
-      <div style={{ marginTop: "10vh", width: "100vw", display: 'flex', flexDirection: "row", alignItems: 'center', justifyContent: 'center', alignContent: 'center', height: '90vh' }}>
+      <div
+        style={{
+          marginTop: "10vh",
+          width: "100vw",
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          justifyContent: "center",
+          alignContent: "center",
+          height: "90vh",
+          // backgroundColor: "green",
+        }}
+      >
         <SideBar />
         <Stack>
           {/* Render Other components here */}

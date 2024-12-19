@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
-import MesDataGrid from '../MesDataGrid'
-import { GridColDef, GridRowApi } from '@mui/x-data-grid';
-import MesDataGridFilter from '../../MesDataGridFilter/MesDataGridFilter';
+import React, { useEffect, useState } from "react";
+import MesDataGrid from "../MesDataGrid";
+import { GridColDef, GridRowApi } from "@mui/x-data-grid";
+import MesDataGridFilter from "../../MesDataGridFilter/MesDataGridFilter";
 
 // const columns: GridColDef[] = [
 //     { field: 'id', headerName: 'ID', width: 90 },
@@ -42,68 +42,96 @@ import MesDataGridFilter from '../../MesDataGridFilter/MesDataGridFilter';
 //     // { id: 30, name: 'John Doe', age: 35 },
 // ];
 
-
 const Example = () => {
-    const [rows, setRows] = useState<object[]>()
-    const columns: GridColDef[] = [
-        { field: 'id', headerName: 'ID', width: 90 },
-        { field: 'quote', headerName: 'Quote', width: 150 },
-        { field: "author", headerName: 'Author', width: 110, align: 'center', headerAlign: "center" },
-    ]
-    const [params, setParams] = useState<{ limit: number, skip: number, total: number }>({
-        total: 0,
-        limit: 10,
-        skip: 0
-    })
+  const [rows, setRows] = useState<object[]>();
+  const columns: GridColDef[] = [
+    { field: "id", headerName: "ID", width: 90 },
+    { field: "quote", headerName: "Quote", flex: 1 },
+    {
+      field: "author",
+      headerName: "Author",
+      //   width: 110,
+      flex: 1,
+      align: "center",
+      headerAlign: "center",
+    },
+  ];
+  const [params, setParams] = useState<{
+    limit: number;
+    skip: number;
+    total: number;
+  }>({
+    total: 0,
+    limit: 10,
+    skip: 0,
+  });
 
-    const [total, setTotal] = useState(10)
+  const [total, setTotal] = useState(10);
 
-    const handlePrev = () => {
-        setParams((prev) => ({ ...prev, skip: prev.skip - 10 }))
-        fetchData(params.limit, params.skip - 10);
+  const handlePrev = () => {
+    setParams((prev) => ({ ...prev, skip: prev.skip - 10 }));
+    fetchData(params.limit, params.skip - 10);
+  };
+  const handleNext = () => {
+    setParams((prev) => ({ ...prev, skip: prev.skip + 10 }));
+    fetchData(params.limit, params.skip + 10);
+  };
+
+  const fetchData = async (limit?: number, skip?: number) => {
+    try {
+      const response = await fetch(
+        `https://dummyjson.com/quotes?limit=${limit || params.limit}&skip=${skip || params.skip}`,
+      );
+      const data = await response.json();
+      setRows(data?.quotes);
+      setTotal(data?.total);
+    } catch (err: any) {
+      setRows([
+        {
+          id: 0,
+          quote: err?.message,
+          author: "Error - Can't Fetch Data",
+        },
+      ]);
     }
-    const handleNext = () => {
-        setParams((prev) => ({ ...prev, skip: prev.skip + 10 }))
-        fetchData(params.limit, params.skip + 10);
-    }
+  };
 
-    const fetchData = async (limit?: number, skip?: number) => {
-        try {
-            const response = await fetch(`https://dummyjson.com/quotes?limit=${limit || params.limit}&skip=${skip || params.skip}`);
-            const data = await response.json();
-            setRows(data?.quotes);
-            setTotal(data?.total)
-        } catch (err: any) {
-            setRows([{
-                id: 0,
-                quote: err?.message,
-                author: "Error - Can't Fetch Data"
-            }])
+  // api
+  // useEffect(() => {
+  //     fetchData();
+  // }, [])
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        width: "95vw",
+        height: "50vh",
+      }}
+    >
+      <MesDataGrid
+        columns={columns}
+        rows={rows}
+        checkboxSelection
+        pageSize={10}
+        filter
+        filterComponent={
+          <MesDataGridFilter popupComponent={<h2>Hello world</h2>} />
         }
-    }
+        onClickNext={handleNext}
+        onClickPrev={handlePrev}
+        asyncPagination={true}
+        asyncPageSize={params.limit}
+        asyncSkip={params.skip + 10}
+        asyncTotal={total}
+      />
+    </div>
+  );
+};
 
-    // api
-    // useEffect(() => {
-    //     fetchData();
-    // }, [])
-
-    useEffect(() => {
-        fetchData();
-    }, [])
-
-    return (
-        <div style={{ display: "flex", flexDirection: 'row', width: '80vw', height: '50vh' }}>
-            <MesDataGrid columns={columns} rows={rows} checkboxSelection pageSize={10}
-                filter filterComponent={<MesDataGridFilter popupComponent={<h2>Hello world</h2>} />}
-                onClickNext={handleNext}
-                onClickPrev={handlePrev}
-                asyncPagination={true}
-                asyncPageSize={params.limit}
-                asyncSkip={params.skip + 10}
-                asyncTotal={total}
-            />
-        </div>
-    )
-}
-
-export default Example
+export default Example;
