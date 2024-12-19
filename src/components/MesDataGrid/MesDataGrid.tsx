@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { FC, ReactNode } from 'react';
 import { DataGrid, DataGridProps, GridApi, GridColumnVisibilityModel, GridFooterContainer, GridInitialState, GridPagination, GridPanelFooter, GridToolbarFilterButton, GridToolbarQuickFilter, gridPageCountSelector, gridPageSelector, gridPageSizeSelector, gridPaginationModelSelector, gridRowCountSelector, useGridApiContext, useGridSelector } from '@mui/x-data-grid';
 import { GridRowModesModel, GridCellModesModel, GridFilterModel, GridSortModel, GridCellParams, GridCallbackDetails, GridColDef, GridDensity, GridPaginationModel, GridRowParams, GridRowSelectionModel, GridSlotsComponent, GridRowHeightParams, GridLocaleText, GridRowSpacingParams, GridRowSpacing, GridValidRowModel } from '@mui/x-data-grid/models';
 import { Box, Checkbox, IconButton, SxProps } from '@mui/material';
@@ -14,10 +14,42 @@ import PrevIcon from "./assets/PrevIcon.svg"
 import PrevIconDisabled from "./assets/PrevIconDisabled.svg"
 import './styles.css'
 
+interface IMesGridFooter {
+    asyncPagination: boolean;
+    onClickNext?: (args?: any) => void;
+    onClickPrev?: (args?: any) => void;
+}
 
-function MesGridFooter() {
+interface IAsyncPaginationProps {
+    asyncPageSize: number; // Example property specific to asyncPagination
+    asyncTotal: number;
+    asyncSkip: number;
+}
+
+// Union type for MesGridFooterProps
+type IMesGridFooterProps =
+    | (IMesGridFooter & { asyncPagination: false })
+    | (IMesGridFooter & { asyncPagination: true } & IAsyncPaginationProps);
+
+interface IGridToolbarProps {
+    filter?: boolean;
+    filterComponent?: React.ReactNode;
+}
+
+
+
+export interface IMesDataGridProps<R extends GridValidRowModel = any, TAsync extends boolean = false>
+    extends DataGridProps<R>, IMesGridFooter, IGridToolbarProps {
+    pageSize?: number;
+    asyncPagination: TAsync;
+    asyncProps?: TAsync extends true ? IAsyncPaginationProps : undefined;
+}
+
+const MesGridFooter: FC<IMesGridFooterProps> = ({
+    onClickNext = () => { },
+    onClickPrev = () => { },
+}) => {
     const apiRef = useGridApiContext();
-
     // Selectors
     const page = useGridSelector(apiRef, gridPageSelector); // Current Page (0-based)
     const pageSize = useGridSelector(apiRef, gridPageSizeSelector); // Rows per page
@@ -39,6 +71,7 @@ function MesGridFooter() {
                 padding: "0 16px",
             }}
         >
+
             {/* Custom Footer Info */}
             <div style={{ fontWeight: 400, color: '#687182' }}>
                 {`${startRow} - ${endRow} of ${rowCount}`}
@@ -46,15 +79,29 @@ function MesGridFooter() {
             <GridPagination
                 sx={{ mr: -7 }}
                 labelDisplayedRows={({ from, to, count }) => { return '' }}
-                nextIconButtonProps={{ style: { display: "none" } }}
-                backIconButtonProps={{ style: { display: "none" } }}
-                className='removeParagraphMargin'
+                slotProps={{
+                    actions: {
+                        nextButton: {
+                            style: {
+                                display: "none"
+                            }
+                        },
+                        previousButton: {
+                            style: {
+                                display: "none"
+                            }
+                        }
+                    }
+                }}
             />
             {/* Custom Actions */}
             <div style={{ display: 'flex', flexDirection: 'row', alignContent: "center", alignItems: 'center' }}>
                 {/* <button onClick={() => apiRef.current.setPage(0)}>First</button> */}
                 <IconButton
-                    onClick={() => apiRef.current.setPage(Math.max(0, page - 1))}
+                    onClick={() => {
+                        apiRef.current.setPage(Math.max(0, page - 1));
+                        onClickPrev();
+                    }}
                     disabled={page === 0}
                     disableFocusRipple
                     disableTouchRipple
@@ -66,13 +113,16 @@ function MesGridFooter() {
                     {`${page + 1} / ${pageCount}`}
                 </div>
                 <IconButton
-                    onClick={() => apiRef.current.setPage(Math.min(pageCount - 1, page + 1))}
-                    disabled={page === pageCount - 1}
+                    onClick={() => {
+                        apiRef.current.setPage(Math.min(pageCount - 1, page + 1));
+                        onClickNext();
+                    }}
+                    disabled={page === 0 || page === pageCount - 1}
                     disableFocusRipple
                     disableTouchRipple
                     disableRipple
                 >
-                    {page === pageCount - 1 ? <NextIconDisabled /> : <NextIcon />}
+                    {(page === 0 || page === pageCount - 1) ? <NextIconDisabled /> : <NextIcon />}
                 </IconButton>
                 {/* <button onClick={() => apiRef.current.setPage(pageCount - 1)}>
                     Last
@@ -82,7 +132,7 @@ function MesGridFooter() {
     );
 }
 
-function MesCustomCheckBox(props: any) {
+const MesCustomCheckBox = (props: any) => {
     return <Checkbox
         {...props}
         /*indeterminate={props.Indeterminate}*/
@@ -97,12 +147,7 @@ function MesCustomCheckBox(props: any) {
     />;
 }
 
-interface ICustomToolbarProps {
-    filter?: boolean;
-    filterComponent?: React.ReactNode;
-}
-
-const CustomToolbar: React.FC<ICustomToolbarProps> = ({ filter = false, filterComponent }) => {
+const CustomToolbar: React.FC<IGridToolbarProps> = ({ filter = false, filterComponent }) => {
     return (
         <Box
             sx={{
@@ -133,26 +178,17 @@ const CustomToolbar: React.FC<ICustomToolbarProps> = ({ filter = false, filterCo
     );
 };
 
-
-
-export interface IMesDataGridProps<R extends GridValidRowModel = any>
-    extends DataGridProps<R> {
-    // Add custom properties if needed
-    filter?: boolean,
-    filterComponent?: ReactNode,
-}
-
-const MesData: React.FC<IMesDataGridProps> = ({
-    columns,
-    rows,
-    apiRef,
-    checkboxSelection = false,
-    hideFooter = false,
-    sx,
-    filter,
-    filterComponent,
-    ...otherProps
-}) => {
+const MesData = <R extends GridValidRowModel>(props: IMesDataGridProps<R>) => {
+    const { columns,
+        rows,
+        apiRef,
+        checkboxSelection = false,
+        hideFooter = false,
+        sx,
+        filter,
+        pageSize,
+        filterComponent,
+        ...otherProps } = props;
     return (
         <div style={{ display: 'flex', flexDirection: 'column' }}>
             <DataGrid
@@ -161,8 +197,9 @@ const MesData: React.FC<IMesDataGridProps> = ({
                 apiRef={apiRef}
                 checkboxSelection={checkboxSelection}
                 initialState={
-                    { // Initialize grid data parameters
-                        pagination: { paginationModel: { pageSize: 5 } }, // Initialize pagination to display ten initialRows per page
+                    {
+                        // Initialize grid data parameters
+                        pagination: { paginationModel: { pageSize: pageSize || 5 } }, // Initialize pagination to display ten initialRows per page
                         sorting: {
                             sortModel: [
                                 {
@@ -180,9 +217,8 @@ const MesData: React.FC<IMesDataGridProps> = ({
                 columnHeaderHeight={otherProps.columnHeaderHeight || 40}
                 slots={{
                     ...otherProps.slots,
-                    // toolbar: <CustomToolbar filter={filter} filterComponent={filterComponent} /> as unknown as React.JSXElementConstructor<any>, // Use a custom toolbar instead of the default toolbar
                     toolbar: (props) => <CustomToolbar filter={filter} filterComponent={filterComponent || <div>Toolbar Filter Component</div>} />,
-                    footer: MesGridFooter, // Use a custom footer instead of the default footer
+                    footer: (props) => <MesGridFooter asyncPagination={otherProps.asyncPagination} onClickNext={otherProps.onClickNext} onClickPrev={otherProps.onClickPrev} />, // Use a custom footer instead of the default footer
                     openFilterButtonIcon: FilterIcon as unknown as React.JSXElementConstructor<any>, // Change the icon of Filter Button in the Toolbar
                     columnSortedAscendingIcon: ColumnSortingSelectedAltIcon as unknown as React.JSXElementConstructor<any>,
                     columnSortedDescendingIcon: ColumnSortingSelectedIcon as unknown as React.JSXElementConstructor<any>,
