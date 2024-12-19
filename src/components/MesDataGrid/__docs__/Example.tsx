@@ -56,18 +56,23 @@ const Example = () => {
         skip: 0
     })
 
+    const [total, setTotal] = useState(10)
+
     const handlePrev = () => {
         setParams((prev) => ({ ...prev, skip: prev.skip - 10 }))
+        fetchData(params.limit, params.skip - 10);
     }
     const handleNext = () => {
         setParams((prev) => ({ ...prev, skip: prev.skip + 10 }))
+        fetchData(params.limit, params.skip + 10);
     }
 
-    const fetchData = async () => {
+    const fetchData = async (limit?: number, skip?: number) => {
         try {
-            const response = await fetch(`https://dummyjson.com/quotes?limit=${params.limit}&skip=${params.skip}`);
+            const response = await fetch(`https://dummyjson.com/quotes?limit=${limit || params.limit}&skip=${skip || params.skip}`);
             const data = await response.json();
             setRows(data?.quotes);
+            setTotal(data?.total)
         } catch (err: any) {
             setRows([{
                 id: 0,
@@ -84,7 +89,7 @@ const Example = () => {
 
     useEffect(() => {
         fetchData();
-    }, [params])
+    }, [])
 
     return (
         <div style={{ display: "flex", flexDirection: 'row', width: '80vw', height: '50vh' }}>
@@ -92,7 +97,10 @@ const Example = () => {
                 filter filterComponent={<MesDataGridFilter popupComponent={<h2>Hello world</h2>} />}
                 onClickNext={handleNext}
                 onClickPrev={handlePrev}
-                asyncPagination={false}
+                asyncPagination={true}
+                asyncPageSize={params.limit}
+                asyncSkip={params.skip + 10}
+                asyncTotal={total}
             />
         </div>
     )

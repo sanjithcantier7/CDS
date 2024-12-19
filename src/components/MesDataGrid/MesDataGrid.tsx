@@ -14,22 +14,14 @@ import PrevIcon from "./assets/PrevIcon.svg"
 import PrevIconDisabled from "./assets/PrevIconDisabled.svg"
 import './styles.css'
 
-interface IMesGridFooter {
+interface IMesGridFooterProps {
     asyncPagination: boolean;
     onClickNext?: (args?: any) => void;
     onClickPrev?: (args?: any) => void;
+    asyncPageSize?: number;
+    asyncTotal?: number;
+    asyncSkip?: number;
 }
-
-interface IAsyncPaginationProps {
-    asyncPageSize: number; // Example property specific to asyncPagination
-    asyncTotal: number;
-    asyncSkip: number;
-}
-
-// Union type for MesGridFooterProps
-type IMesGridFooterProps =
-    | (IMesGridFooter & { asyncPagination: false })
-    | (IMesGridFooter & { asyncPagination: true } & IAsyncPaginationProps);
 
 interface IGridToolbarProps {
     filter?: boolean;
@@ -37,17 +29,18 @@ interface IGridToolbarProps {
 }
 
 
-
-export interface IMesDataGridProps<R extends GridValidRowModel = any, TAsync extends boolean = false>
-    extends DataGridProps<R>, IMesGridFooter, IGridToolbarProps {
+export interface IMesDataGridProps<R extends GridValidRowModel = any>
+    extends DataGridProps<R>, IMesGridFooterProps, IGridToolbarProps {
     pageSize?: number;
-    asyncPagination: TAsync;
-    asyncProps?: TAsync extends true ? IAsyncPaginationProps : undefined;
 }
 
 const MesGridFooter: FC<IMesGridFooterProps> = ({
     onClickNext = () => { },
     onClickPrev = () => { },
+    asyncPagination = false,
+    asyncPageSize = 10,
+    asyncTotal = 0,
+    asyncSkip = 0
 }) => {
     const apiRef = useGridApiContext();
     // Selectors
@@ -60,6 +53,12 @@ const MesGridFooter: FC<IMesGridFooterProps> = ({
     const startRow = page * pageSize + 1; // Start index (1-based)
     const endRow = Math.min((page + 1) * pageSize, rowCount); // End index, capped at total row count
 
+    // async calc
+    const asyncStartRow = asyncSkip;
+    const asyncEndRow = Math.min(asyncPageSize);
+    const asyncPageCount = Math.ceil(asyncTotal / pageSize);
+
+
     return (
         <GridFooterContainer
             sx={{
@@ -71,12 +70,14 @@ const MesGridFooter: FC<IMesGridFooterProps> = ({
                 padding: "0 16px",
             }}
         >
-
             {/* Custom Footer Info */}
-            <div style={{ fontWeight: 400, color: '#687182' }}>
-                {`${startRow} - ${endRow} of ${rowCount}`}
-            </div>
-            <GridPagination
+            {asyncPagination ? <div style={{ fontWeight: 400, color: '#687182' }}>
+                {`${asyncSkip + 1 - 10} - ${asyncSkip} of ${asyncTotal}`}
+            </div> :
+                <div style={{ fontWeight: 400, color: '#687182' }}>
+                    {`${startRow} - ${endRow} of ${rowCount}`}
+                </div>}
+            {!asyncPagination && <GridPagination
                 sx={{ mr: -7 }}
                 labelDisplayedRows={({ from, to, count }) => { return '' }}
                 slotProps={{
@@ -93,9 +94,37 @@ const MesGridFooter: FC<IMesGridFooterProps> = ({
                         }
                     }
                 }}
-            />
+            />}
             {/* Custom Actions */}
-            <div style={{ display: 'flex', flexDirection: 'row', alignContent: "center", alignItems: 'center' }}>
+            {asyncPagination ? <div style={{ display: 'flex', flexDirection: 'row', alignContent: "center", alignItems: 'center' }}>
+                <IconButton
+                    onClick={() => {
+                        apiRef.current.setPage(Math.max(0, page - 1));
+                        onClickPrev();
+                    }}
+                    disabled={asyncSkip === 10}
+                    disableFocusRipple
+                    disableTouchRipple
+                    disableRipple
+                >
+                    {asyncSkip === 10 ? <PrevIconDisabled /> : <PrevIcon />}
+                </IconButton>
+                <div style={{ fontWeight: 400, color: '#687182', paddingBottom: 4 }}>
+                    {`${page + 1 * asyncSkip / pageSize} / ${asyncPageCount}`}
+                </div>
+                <IconButton
+                    onClick={() => {
+                        apiRef.current.setPage(Math.min(pageCount - 1, page + 1));
+                        onClickNext();
+                    }}
+                    disabled={asyncPageCount * 10 === asyncSkip}
+                    disableFocusRipple
+                    disableTouchRipple
+                    disableRipple
+                >
+                    {asyncPageCount * 10 === asyncSkip ? <NextIconDisabled /> : <NextIcon />}
+                </IconButton>
+            </div> : <div style={{ display: 'flex', flexDirection: 'row', alignContent: "center", alignItems: 'center' }}>
                 {/* <button onClick={() => apiRef.current.setPage(0)}>First</button> */}
                 <IconButton
                     onClick={() => {
@@ -127,7 +156,7 @@ const MesGridFooter: FC<IMesGridFooterProps> = ({
                 {/* <button onClick={() => apiRef.current.setPage(pageCount - 1)}>
                     Last
                 </button> */}
-            </div>
+            </div>}
         </GridFooterContainer>
     );
 }
@@ -218,7 +247,7 @@ const MesData = <R extends GridValidRowModel>(props: IMesDataGridProps<R>) => {
                 slots={{
                     ...otherProps.slots,
                     toolbar: (props) => <CustomToolbar filter={filter} filterComponent={filterComponent || <div>Toolbar Filter Component</div>} />,
-                    footer: (props) => <MesGridFooter asyncPagination={otherProps.asyncPagination} onClickNext={otherProps.onClickNext} onClickPrev={otherProps.onClickPrev} />, // Use a custom footer instead of the default footer
+                    footer: (props) => <MesGridFooter asyncPagination={otherProps.asyncPagination} onClickNext={otherProps.onClickNext} onClickPrev={otherProps.onClickPrev} asyncPageSize={otherProps.asyncPageSize} asyncSkip={otherProps.asyncSkip} asyncTotal={otherProps.asyncTotal} />, // Use a custom footer instead of the default footer
                     openFilterButtonIcon: FilterIcon as unknown as React.JSXElementConstructor<any>, // Change the icon of Filter Button in the Toolbar
                     columnSortedAscendingIcon: ColumnSortingSelectedAltIcon as unknown as React.JSXElementConstructor<any>,
                     columnSortedDescendingIcon: ColumnSortingSelectedIcon as unknown as React.JSXElementConstructor<any>,
