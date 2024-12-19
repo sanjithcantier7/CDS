@@ -6,6 +6,7 @@ import TextFieldComponent from "./components/TextField/__docs__/Example";
 import { Stack, TitleBar, TopBar } from "./components";
 import Example from "./components/Dialogue/__docs__/Example";
 import FilterComponent from "./components/MesDataGridFilter/__docs__/Example";
+import {TextField} from "@mui/material"
 
 interface Props {}
 
@@ -43,6 +44,8 @@ const App: React.FC<Props> = () => {
         <SideBar />
         <Stack>
           {/* Render Other components here */}
+          <h2>TextField</h2>
+          <TextFieldComponent />
           <h2>MesDataGrid Component</h2>
           <DataGrid />
           <h2>MesDataGrid Filter</h2>
@@ -50,8 +53,6 @@ const App: React.FC<Props> = () => {
           {/* Dialogue Component */}
           <h2>Dialogue Component</h2>
           <Example />
-          <h2>TextField</h2>
-          <TextFieldComponent />
         </Stack>
       </div>
     </div>

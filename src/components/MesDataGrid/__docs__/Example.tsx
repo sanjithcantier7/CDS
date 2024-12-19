@@ -70,11 +70,11 @@ const Example = () => {
 
   const handlePrev = () => {
     setParams((prev) => ({ ...prev, skip: prev.skip - 10 }));
-    fetchData(params.limit, params.skip - 10);
+    // fetchData(params.limit, params.skip - 10);
   };
   const handleNext = () => {
     setParams((prev) => ({ ...prev, skip: prev.skip + 10 }));
-    fetchData(params.limit, params.skip + 10);
+    // fetchData(params.limit, params.skip + 10);
   };
 
   const fetchData = async (limit?: number, skip?: number) => {
@@ -102,7 +102,7 @@ const Example = () => {
   // }, [])
 
   useEffect(() => {
-    fetchData();
+    // fetchData();
   }, []);
 
   return (
