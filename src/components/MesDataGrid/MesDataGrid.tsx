@@ -146,7 +146,6 @@ const MesData: React.FC<IMesDataGridProps> = ({
     columns,
     rows,
     apiRef,
-    autoHeight = true,
     checkboxSelection = false,
     hideFooter = false,
     sx,
@@ -155,45 +154,45 @@ const MesData: React.FC<IMesDataGridProps> = ({
     ...otherProps
 }) => {
     return (
-
-        <DataGrid
-            columns={columns}
-            rows={rows}
-            apiRef={apiRef}
-            autoHeight={autoHeight}
-            checkboxSelection={checkboxSelection}
-            initialState={
-                { // Initialize grid data parameters
-                    pagination: { paginationModel: { pageSize: 5 } }, // Initialize pagination to display ten initialRows per page
-                    sorting: {
-                        sortModel: [
-                            {
-                                field: 'id',
-                                sort: 'desc',
-                            },
-                        ],
-                    },
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <DataGrid
+                columns={columns}
+                rows={rows}
+                apiRef={apiRef}
+                checkboxSelection={checkboxSelection}
+                initialState={
+                    { // Initialize grid data parameters
+                        pagination: { paginationModel: { pageSize: 5 } }, // Initialize pagination to display ten initialRows per page
+                        sorting: {
+                            sortModel: [
+                                {
+                                    field: 'id',
+                                    sort: 'desc',
+                                },
+                            ],
+                        },
+                    }
                 }
-            }
-            hideFooter={hideFooter}
-            sx={{ ...sx, ...customStyleSx }}
-            style={{ zIndex: 0 }}
-            editMode={otherProps.editMode || "row"}
-            columnHeaderHeight={otherProps.columnHeaderHeight || 40}
-            slots={{
-                ...otherProps.slots,
-                // toolbar: <CustomToolbar filter={filter} filterComponent={filterComponent} /> as unknown as React.JSXElementConstructor<any>, // Use a custom toolbar instead of the default toolbar
-                toolbar: (props) => <CustomToolbar filter={filter} filterComponent={filterComponent || <div>Toolbar Filter Component</div>} />,
-                footer: MesGridFooter, // Use a custom footer instead of the default footer
-                openFilterButtonIcon: FilterIcon as unknown as React.JSXElementConstructor<any>, // Change the icon of Filter Button in the Toolbar
-                columnSortedAscendingIcon: ColumnSortingSelectedAltIcon as unknown as React.JSXElementConstructor<any>,
-                columnSortedDescendingIcon: ColumnSortingSelectedIcon as unknown as React.JSXElementConstructor<any>,
-                baseCheckbox: MesCustomCheckBox,
-            }}
+                hideFooter={hideFooter}
+                sx={{ ...sx, ...customStyleSx }}
+                style={{ zIndex: 0 }}
+                editMode={otherProps.editMode || "row"}
+                columnHeaderHeight={otherProps.columnHeaderHeight || 40}
+                slots={{
+                    ...otherProps.slots,
+                    // toolbar: <CustomToolbar filter={filter} filterComponent={filterComponent} /> as unknown as React.JSXElementConstructor<any>, // Use a custom toolbar instead of the default toolbar
+                    toolbar: (props) => <CustomToolbar filter={filter} filterComponent={filterComponent || <div>Toolbar Filter Component</div>} />,
+                    footer: MesGridFooter, // Use a custom footer instead of the default footer
+                    openFilterButtonIcon: FilterIcon as unknown as React.JSXElementConstructor<any>, // Change the icon of Filter Button in the Toolbar
+                    columnSortedAscendingIcon: ColumnSortingSelectedAltIcon as unknown as React.JSXElementConstructor<any>,
+                    columnSortedDescendingIcon: ColumnSortingSelectedIcon as unknown as React.JSXElementConstructor<any>,
+                    baseCheckbox: MesCustomCheckBox,
+                }}
 
-            pageSizeOptions={otherProps.pageSizeOptions || [5, 10, 15, 25]}
-            {...otherProps}
-        />
+                pageSizeOptions={otherProps.pageSizeOptions || [5, 10, 15, 25]}
+                {...otherProps}
+            />
+        </div>
     );
 };
 
