@@ -11,7 +11,7 @@ const Item = styled(Paper)(({ theme }) => ({
 const Example = () => {
   const [text, settext] = useState("");
   return (
-    <Stack spacing={3} direction={"row"}>
+    <Stack spacing={3} direction={"row"} sx={{ alignItems: "center" }}>
       <TextField
         label={"Default"}
         value={text}
@@ -43,6 +43,7 @@ const Example = () => {
         value={text}
         onChange={(e: any) => settext(e.target.value)}
         required
+        width={200}
       />
 
       <TextField
@@ -51,6 +52,7 @@ const Example = () => {
         value={text}
         onChange={(e: any) => settext(e.target.value)}
         required
+        width={200}
       />
     </Stack>
   );
