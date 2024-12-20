@@ -1,0 +1,59 @@
+import { Canvas, Meta } from "@storybook/blocks";
+import Example from "./Example.tsx";
+import * as ProgressContainer from "./ProgressContainer.stories.tsx";
+
+<Meta of={ProgressContainer} title="ProgressContainer" />
+
+# ProgressContainer
+
+The `ProgressContainer` component is a flexible container for displaying progress-related information such as an icon, label, description, and actions.
+
+##  Standard
+
+<Canvas of={ProgressContainer.Standard} />
+
+### Usage
+
+```tsx
+import {ProgressContainer} from 'cds';
+
+const Example = () => {
+    return (
+        <ProgressContainer
+            variant="standard"
+            label="Sample Label"
+            description="Sample Description"
+            icon="/path/to/icon.svg"
+        >
+            <button>Action</button>
+        </ProgressContainer>;
+    );
+};
+
+export default Example;
+```
+
+##  Tabs
+
+<Canvas of={ProgressContainer.Tabs} />
+
+### Usage
+
+```tsx
+import {ProgressContainer} from 'cds';
+
+const Example = () => {
+    return (
+        <ProgressContainer
+            variant="standard"
+            label="Sample Label"
+            description="Sample Description"
+            icon="/path/to/icon.svg"
+        >
+            <button>Action</button>
+        </ProgressContainer>;
+    );
+};
+
+export default Example;
+```

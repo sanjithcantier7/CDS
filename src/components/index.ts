@@ -6,5 +6,7 @@ export { default as SideBar } from "./SideBar";
 export { default as TopBar } from "./TopBar";
 export { default as MesDataGrid } from "./MesDataGrid";
 export { default as TextField } from "./TextField";
+export { default as ProgressContainer } from "./ProgressContainer";
+
 export * from "@mui/material";
 export * from "@mui/utils";
