@@ -1,12 +1,8 @@
-import React from 'react'
-import MesDataGridFilter from '../MesDataGridFilter'
+import React from "react";
+import MesDataGridFilter from "../MesDataGridFilter";
 
 const Example = () => {
-    return (
-        <MesDataGridFilter>
+  return <MesDataGridFilter></MesDataGridFilter>;
+};
 
-        </MesDataGridFilter>
-    )
-}
-
-export default Example
+export default Example;
