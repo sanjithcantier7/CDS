@@ -1,13 +1,10 @@
 import React, { FC } from "react";
 import {
-  // Grid2,
   TextField as MuiTextField,
   Paper,
   Stack,
   TextFieldProps,
 } from "@mui/material";
-import Grid2 from "@mui/material/Grid2";
-import styled from "styled-components";
 
 type ITextFieldProps = TextFieldProps & {
   width?: string | number | undefined;
@@ -26,6 +23,7 @@ const TextField: FC<ITextFieldProps> = (props: ITextFieldProps) => {
               visibility: "visible",
               position: "absolute",
               top: "-15px",
+              zIndex: 0,
               // marginTop: -15,
               fontWeight: 700,
               fontSize: 20,
@@ -49,6 +47,7 @@ const TextField: FC<ITextFieldProps> = (props: ITextFieldProps) => {
             },
             "& .MuiFormLabel-asterisk": {
               color: "red",
+              zIndex: 0,
             },
             "& .MuiInputBase-root": {
               backgroundColor: "#F7F7F7",

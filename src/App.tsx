@@ -4,6 +4,7 @@ import SideBar from "./components/SideBar/__docs__/Example";
 import DataGrid from "./components/MesDataGrid/__docs__/Example";
 import TextFieldComponent from "./components/TextField/__docs__/Example";
 import ProgressContainerExample from "./components/ProgressContainer/__docs__/Example";
+import ProgressCardExample from "./components/ProgressCard/__docs__/Example";
 import { Stack, TitleBar, TopBar } from "./components";
 import Example from "./components/Dialogue/__docs__/Example";
 import FilterComponent from "./components/MesDataGridFilter/__docs__/Example";
@@ -55,6 +56,8 @@ const App: React.FC<Props> = () => {
           <Example />
           {/* <h2>Progress Container</h2> */}
           {/* <ProgressContainerExample /> */}
+          {/* Progress Card */}
+          <ProgressCardExample />
         </Stack>
       </div>
     </div>
