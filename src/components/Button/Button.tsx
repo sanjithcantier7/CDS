@@ -1,9 +1,9 @@
 import React, { ReactNode } from "react";
 import IconButton from "@mui/material/IconButton";
 
-type ButtonSize = "small" | "medium" | "large";
+export type ButtonSize = "small" | "medium" | "large";
 
-interface ButtonBaseProps
+export interface ButtonBaseProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
   onClick: () => void;
@@ -11,19 +11,19 @@ interface ButtonBaseProps
   disabled?: boolean;
 }
 
-interface StandardButtonProps extends ButtonBaseProps {
+export interface StandardButtonProps extends ButtonBaseProps {
   variant: "standard";
   color?: string;
 }
 
-interface CustomButtonProps extends ButtonBaseProps {
+export interface CustomButtonProps extends ButtonBaseProps {
   variant: "custom";
   icon: ReactNode;
   sx?: any;
   tooltip?: string;
 }
 
-type ButtonProps = StandardButtonProps | CustomButtonProps;
+export type ButtonProps = StandardButtonProps | CustomButtonProps;
 
 const styles = {
   standard: {
@@ -107,4 +107,3 @@ const Button = (props: ButtonProps) => {
 };
 
 export default Button;
-
