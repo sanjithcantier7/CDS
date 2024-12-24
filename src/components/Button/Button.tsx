@@ -1,53 +1,110 @@
-import React, { MouseEventHandler } from "react";
-import styled from "styled-components";
+import React, { ReactNode } from "react";
+import IconButton from "@mui/material/IconButton";
 
-export type ButtonProps = {
-    text?: string;
-    primary?: boolean;
-    disabled?: boolean;
-    size?: "small" | "medium" | "large";
-    onClick?: MouseEventHandler<HTMLButtonElement>;
+type ButtonSize = "small" | "medium" | "large";
+
+interface ButtonBaseProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  label: string;
+  onClick: () => void;
+  size?: ButtonSize;
+  disabled?: boolean;
+}
+
+interface StandardButtonProps extends ButtonBaseProps {
+  variant: "standard";
+  color?: string;
+}
+
+interface CustomButtonProps extends ButtonBaseProps {
+  variant: "custom";
+  icon: ReactNode;
+  sx?: any;
+  tooltip?: string;
+}
+
+type ButtonProps = StandardButtonProps | CustomButtonProps;
+
+const styles = {
+  standard: {
+    variant: {
+      borderRadius: 3,
+      backgroundColor: "gray",
+      border: "none",
+      color: "white",
+    },
+    sizes: {
+      small: { padding: "5px 10px", fontSize: "14px" },
+      medium: { padding: "10px 20px", fontSize: "16px" },
+      large: { padding: "15px 30px", fontSize: "18px" },
+    },
+  },
+  custom: {
+    variant: {
+      borderRadius: 6,
+      backgroundColor: "#2e7d32",
+      color: "#ffffff",
+      border: "none",
+    },
+    sizes: {
+      small: { padding: "8px 14px", fontSize: "14px" },
+      medium: { padding: "12px 12px", fontSize: "16px" },
+      large: { padding: "14px 14px", fontSize: "18px" },
+    },
+  },
 };
 
-const StyledButton = styled.button<ButtonProps>`
-  border: 0;
-  line-height: 1;
-  font-size: 15px;
-  cursor: pointer;
-  font-weight: 700;
-  font-weight: bold;
-  border-radius: 10px;
-  display: inline-block;
-  color: ${(props) => (props.primary ? "#fff" : "#000")};
-  background-color: ${(props) => (props.primary ? "#FF5655" : "#f4c4c4")};
-  padding: ${(props) =>
-        props.size === "small"
-            ? "7px 25px 8px"
-            : props.size === "medium"
-                ? "9px 30px 11px"
-                : "14px 30px 16px"};
-`;
+const Button = (props: ButtonProps) => {
+  const {
+    variant = "standard",
+    size = "medium",
+    disabled = false,
+    label,
+    style,
+    ...restProps
+  } = props;
 
-const Button: React.FC<ButtonProps> = ({
-    size,
-    primary,
-    disabled,
-    text,
-    onClick,
-    ...props
-}) => {
+  const variantStyles = styles[variant];
+  const sizeStyles = styles[variant].sizes[size];
+
+  if (variant === "custom") {
+    const { icon, sx } = props as CustomButtonProps;
     return (
-        <StyledButton
-            type="button"
-            onClick={onClick}
-            primary={primary}
-            disabled={disabled}
-            size={size}
-            {...props}
-        >
-            {text}
-        </StyledButton>
+      <button
+        style={{
+          ...variantStyles.variant,
+          ...sizeStyles,
+          ...(disabled && { opacity: 0.5, cursor: "not-allowed" }),
+          ...style,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: "8px",
+        }}
+        disabled={disabled}
+        {...restProps}
+      >
+        {icon && React.isValidElement(icon) ? icon : null}
+        {label}
+      </button>
     );
+  }
+
+  return (
+    <button
+      style={{
+        ...variantStyles.variant,
+        ...sizeStyles,
+        ...(disabled && { opacity: 0.5, cursor: "not-allowed" }),
+        ...style,
+      }}
+      disabled={disabled}
+      {...restProps}
+    >
+      {label}
+    </button>
+  );
 };
 
 export default Button;
+
