@@ -2,11 +2,11 @@ import { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react";
 import MesSnackbarContext from "../MesSnackbarContext/MesSnackbarContext";
 import { Alert, Slide, Stack, Typography } from "@mui/material";
 
-import CloseIcon from "../../../assets/snackBarClose.svg";
-import InfoIcon from "../../../assets/severityInfo.svg";
-import SuccessIcon from "../../../assets/severitySuccess.svg";
-import ErrorIcon from "../../../assets/severityDanger.svg";
-import WarningIcon from "../../../assets/severityWarning.svg";
+import CloseIcon from "/../assets/snackBarClose.svg";
+import InfoIcon from "/../assets/severityInfo.svg";
+import SuccessIcon from "/../assets/severitySuccess.svg";
+import ErrorIcon from "/../assets/severityDanger.svg";
+import WarningIcon from "/../assets/severityWarning.svg";
 import "./SnackStyles.css";
 
 interface Item {
