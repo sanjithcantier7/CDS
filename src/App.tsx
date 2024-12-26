@@ -8,6 +8,7 @@ import ProgressCardExample from "./components/ProgressCard/__docs__/Example";
 import { Stack, TitleBar, TopBar } from "./components";
 import Example from "./components/Dialogue/__docs__/Example";
 import FilterComponent from "./components/MesDataGridFilter/__docs__/Example";
+import SnackbarCheck from "./components/MesSnackbarStacks/__docs__/Example";
 
 interface Props {}
 
@@ -58,6 +59,10 @@ const App: React.FC<Props> = () => {
           {/* <ProgressContainerExample /> */}
           {/* Progress Card */}
           <ProgressCardExample />
+
+          {/* snackbar check */}
+          <h2>SnackbarCheck</h2>
+          <SnackbarCheck />
         </Stack>
       </div>
     </div>

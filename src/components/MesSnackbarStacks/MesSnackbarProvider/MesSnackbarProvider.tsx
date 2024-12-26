@@ -2,11 +2,10 @@ import { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react";
 import MesSnackbarContext from "../MesSnackbarContext/MesSnackbarContext";
 import { Alert, Slide, Stack, Typography } from "@mui/material";
 
-import CloseIcon from "/../assets/snackBarClose.svg";
-import InfoIcon from "/../assets/severityInfo.svg";
-import SuccessIcon from "/../assets/severitySuccess.svg";
-import ErrorIcon from "/../assets/severityDanger.svg";
-import WarningIcon from "/../assets/severityWarning.svg";
+import InfoIcon from "./assets/severityInfo.svg";
+import SuccessIcon from "./assets/severitySuccess.svg";
+import ErrorIcon from "./assets/severityDanger.svg";
+import WarningIcon from "./assets/severityWarning.svg";
 import "./SnackStyles.css";
 
 interface Item {
@@ -53,7 +52,7 @@ const MesSnackbarProvider: FC<IMesSnackbarProvider> = ({
     message: string,
     heading: string,
     severity: string,
-    timeout: number
+    timeout: number,
   ) => {
     const newItem = {
       heading: heading,
@@ -78,12 +77,12 @@ const MesSnackbarProvider: FC<IMesSnackbarProvider> = ({
         } else {
           return val;
         }
-      })
+      }),
     );
     setTimeout(
       () => setItems((prevItems) => prevItems.filter((item) => item.id !== id)),
 
-      200
+      200,
     );
   };
 
@@ -96,7 +95,7 @@ const MesSnackbarProvider: FC<IMesSnackbarProvider> = ({
     message: string,
     heading: string,
     severity: string,
-    timeout: number
+    timeout: number,
   ) => {
     addItem(message, heading, severity, timeout);
     // console.log(message, heading, severity, timeout);
@@ -166,8 +165,8 @@ function Snack(props: any) {
     props?.item?.message?.length > 30
       ? "50px"
       : props?.item?.message?.length > 50
-      ? "170px"
-      : MinHeight;
+        ? "170px"
+        : MinHeight;
 
   useEffect(() => {
     console.log = console.warn = console.error = () => {};
@@ -191,33 +190,42 @@ function Snack(props: any) {
           backgroundColor: "#FFFFFF",
           boxShadow: "0px 1px 5px 0px rgba(0, 0, 0, 0.25)",
         }}
-        componentsProps={{
-          // closeIcon: <CloseIcon />,
+        slotProps={{
           closeButton: {
             disableRipple: true,
-            // style: { position:"fixed",right:1,top:8 },
           },
         }}
+        // componentsProps={{
+        //   // closeIcon: <CloseIcon />,
+        //   closeButton: {
+        //     disableRipple: true,
+        //     // style: { position:"fixed",right:1,top:8 },
+        //   },
+        // }}
         iconMapping={{
           error: (
-            <img src={ErrorIcon} alt="ErrorIcon" style={{ height: "1.2vh" }} />
+            // <img src={ErrorIcon} alt="ErrorIcon" style={{ height: "1.2vh" }} />
+            <ErrorIcon />
           ),
           success: (
-            <img
-              src={SuccessIcon}
-              alt="SuccessIcon"
-              style={{ height: "1.2vh" }}
-            />
+            // <img
+            //   src={SuccessIcon}
+            //   alt="SuccessIcon"
+            //   style={{ height: "1.2vh" }}
+            // />
+            <SuccessIcon />
           ),
           info: (
-            <img src={InfoIcon} alt="InfoIcon" style={{ height: "1.2vh" }} />
+            // <img src={InfoIcon} alt="InfoIcon" style={{ height: "1.2vh" }} />
+            <InfoIcon />
           ),
           warning: (
-            <img
-              src={WarningIcon}
-              alt="WarningIcon"
-              style={{ height: "1.2vh" }}
-            />
+            // <img
+            //   src={WarningIcon}
+            //   alt="WarningIcon"
+            //   style={{ height: "1.2vh" }}
+            // />
+            <WarningIcon />
           ),
         }}
         sx={{
@@ -238,7 +246,7 @@ function Snack(props: any) {
             overflowY:
               props?.item?.message?.length > 55
                 ? "scroll"
-                : "hidden" ?? "hidden",
+                : ("hidden" ?? "hidden"),
             overflowX: "hidden",
           },
           borderLeft: `4px solid ${
