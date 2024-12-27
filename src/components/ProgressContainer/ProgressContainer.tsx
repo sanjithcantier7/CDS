@@ -75,7 +75,7 @@ const ProgressContainer: FC<IProgressContainerProps> = ({
               // border: "1px solid red",
             }}
             // fontSize={{ md: "2vh", xl: "2vh" }}
-            fontSize={"2.5vh"}
+            fontSize={"2.7vh"}
           >
             {description || "No Description"}
           </Typography>
@@ -83,10 +83,10 @@ const ProgressContainer: FC<IProgressContainerProps> = ({
       </Stack>
       <Stack
         sx={{
-          height: "6vh",
-          // border: "0.1vh solid red",
+          // height: "6vh",
+          // border: "0.1vh solid blue",
           // flexGrow: "1",
-          // pt: "0.3vh",
+          pt: "0.3vh",
         }}
         direction={"row"}
         spacing={"2.4vh"}

@@ -1,4 +1,4 @@
-import { Tab, TabProps } from "@mui/material";
+import { Typography, Tab, TabProps, styled } from "@mui/material";
 import { FC } from "react";
 
 interface IMesTab extends Omit<TabProps, "onClick" | "label"> {
@@ -15,6 +15,24 @@ function a11yProps(index: number) {
   };
 }
 
+const StyledTab = styled(Tab)(({ theme }) => ({
+  alignItems: "flex-start",
+  borderColor: "#FFF",
+  textTransform: "none",
+  backgroundColor: "#fff",
+  minWidth: "0px",
+  borderRadius: 0,
+  lineHeight: -10,
+  elevation: 0,
+  boxShadow: theme.shadows[0],
+  transition: "all 0.2s ease-in-out",
+  "&.Mui-selected, &:hover": {
+    backgroundColor: "#fff",
+    color: "#4376AF",
+    boxShadow: theme.shadows[0],
+  },
+}));
+
 const MesTab: FC<IMesTab> = ({ label, onClick, index, value, ...rest }) => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (onClick) {
@@ -23,36 +41,77 @@ const MesTab: FC<IMesTab> = ({ label, onClick, index, value, ...rest }) => {
   };
 
   return (
-    <Tab
-      label={label}
-      disableRipple
-      onClick={handleClick}
-      {...a11yProps(index)}
-      {...rest} // Spread any additional TabProps
+    // <StyledTab
+    //   label={label}
+    //   disableRipple
+    //   onClick={handleClick}
+    //   {...a11yProps(index)}
+    //   {...rest} // Spread any additional TabProps
+    // style={{
+    //   // height: "5vh",
+    //   // fontSize: "2.2vh",
+    //   textAlign: "center",
+    //   fontWeight: 600,
+    //   letterSpacing: "0.1px",
+    // }}
+    //   sx={{
+    //       padding: "0px",
+    //       borderBottom: `4.5px solid ${value === index ? "#4376AF" : "#FFF"}`,
+    //       ":hover": {
+    //           backgroundColor: "#fff",
+    //       },
+    //     ":focus": {
+    //       color: "#4376AF",
+    //       backgroundColor: "#ffffff",
+    //      },
+    //   }}
+    // sx={{
+    //   textTransform: "capitalize",
+    //   color: value === index ? "#000" : "#808080",
+    //   backgroundColor: value === index ? "#FFF" : "#FFF",
+    // padding: "10px",
+    //     borderBottom: `0.2vh solid ${value === index ? "#4376AF" : "#D1D1D1"}`,
+    //   ":hover": {
+    //     backgroundColor: "#fff",
+    //   },
+    //   ":focus": {
+    //     color: "#4376AF",
+    //     backgroundColor: "#ffffff",
+    //     borderBottom: `0.3vh solid #4376AF`,
+    //   },
+    // }}
+    // />
+    <Typography
       style={{
-        height: "5vh",
-        fontSize: "1.5vh",
-        lineHeight: "20px",
+        // height: "5vh",
+        fontSize: "1.8vh",
         textAlign: "center",
         fontWeight: 600,
         letterSpacing: "0.1px",
       }}
+      onClick={handleClick}
+      {...a11yProps(index)}
+      {...rest}
       sx={{
+        cursor:"default",
+        mx:1,
+        mt: 4,
         textTransform: "capitalize",
-        color: value === index ? "#000" : "#808080",
-        backgroundColor: value === index ? "#FFF" : "#FAFAFA",
-        padding: "10px",
-        borderBottom: `0.2vh solid ${value === index ? "#4376AF" : "#D1D1D1"}`,
+        color: value === index ? "#4376AF" : "#808080",
+        backgroundColor: value === index ? "#FFF" : "#FFF",
+        px: "1px",
+        borderBottom: `0.4vh solid ${value === index ? "#4376AF" : "#FFF"}`,
         ":hover": {
           backgroundColor: "#fff",
         },
         ":focus": {
-          color: "#000",
+          color: "#4376AF",
           backgroundColor: "#ffffff",
-          borderBottom: `0.3vh solid #4376AF`,
         },
       }}
-    />
+    >
+      {label}
+    </Typography>
   );
 };
 

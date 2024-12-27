@@ -9,6 +9,7 @@ import { Stack, TitleBar, TopBar } from "./components";
 import Example from "./components/Dialogue/__docs__/Example";
 import FilterComponent from "./components/MesDataGridFilter/__docs__/Example";
 import SnackbarCheck from "./components/MesSnackbarStacks/__docs__/Example";
+import ExampleProgressContainer from "./components/ProgressContainer/__docs__/Example";
 
 interface Props {}
 
@@ -32,7 +33,7 @@ const App: React.FC<Props> = () => {
       />
       <div
         style={{
-          marginTop: "10vh",
+          marginTop: "3vh",
           width: "100vw",
           display: "flex",
           flexDirection: "row",
@@ -40,21 +41,26 @@ const App: React.FC<Props> = () => {
           justifyContent: "center",
           alignContent: "center",
           height: "90vh",
-          // backgroundColor: "green",
+          backgroundColor: "#F8F7F6",
         }}
       >
         <SideBar />
-        <Stack>
+        <Stack sx={{ width: "100%" }}>
           {/* Render Other components here */}
+          {/* <h2>Progress container</h2> */}
+
+          <ExampleProgressContainer />
+
+          {/*  */}
           <h2>TextField</h2>
-          <TextFieldComponent />
+          {/* <TextFieldComponent /> */}
           <h2>MesDataGrid Component</h2>
-          <DataGrid />
+          {/* <DataGrid /> */}
           <h2>MesDataGrid Filter</h2>
-          <FilterComponent />
+          {/* <FilterComponent /> */}
           {/* Dialogue Component */}
           <h2>Dialogue Component</h2>
-          <Example />
+          {/* <Example /> */}
           {/* <h2>Progress Container</h2> */}
           {/* <ProgressContainerExample /> */}
           {/* Progress Card */}
