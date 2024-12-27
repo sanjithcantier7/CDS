@@ -9,6 +9,7 @@ export { default as TextField } from "./TextField";
 export { default as ProgressContainer } from "./ProgressContainer";
 export { default as ProgressCard } from "./ProgressCard";
 export { default as MesTab } from "./MesTab";
+export { default as MesTabs } from "./MesTabs";
 export { default as MesTabPanel } from "./MesTabPanel";
 export { default as MesSnackbarContext } from "./MesSnackbarStacks/MesSnackbarContext";
 export { default as MesSnackbarProvider } from "./MesSnackbarStacks/MesSnackbarProvider";

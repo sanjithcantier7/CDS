@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../Button";
-import MesInfoIcon from "../Button/ViewLogIcon.svg";
+import MesInfoIcon from "../ViewLogIcon.svg";
 
 const Example = () => {
   return (
