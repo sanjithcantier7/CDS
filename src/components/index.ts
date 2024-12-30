@@ -14,6 +14,7 @@ export { default as MesTabPanel } from "./MesTabPanel";
 export { default as MesSnackbarContext } from "./MesSnackbarStacks/MesSnackbarContext";
 export { default as MesSnackbarProvider } from "./MesSnackbarStacks/MesSnackbarProvider";
 export { default as useMesSnackbarContext } from "./MesSnackbarStacks/useMesSnackbarContext";
+export { default as ContainerTitle } from "./ContainerTitle";
 
 export * from "@mui/material";
 export * from "@mui/utils";
