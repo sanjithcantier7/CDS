@@ -32,6 +32,8 @@ import TopBarButton from "./Utils/TopBarButton";
 
 const CustomTopbar = styled(AppBar)(({ theme }) => ({
   zIndex: 1,
+  // animation: "ease-in-out",
+  // transition: "all 0.3s ease-in-out",
 }));
 
 type listButtons = {
@@ -44,12 +46,8 @@ interface ITopBar {
   leftComponents?: ReactNode | JSX.Element | ReactNode[] | JSX.Element[];
   RightComponents?: ReactNode | JSX.Element | ReactNode[] | JSX.Element[];
 }
-                                                                                                                    
-const TopBar: FC<ITopBar> = ({
-  leftComponents,
-  RightComponents,
-  open,
-}) => {
+
+const TopBar: FC<ITopBar> = ({ leftComponents, RightComponents, open }) => {
   const [isSidebarExpanded, setSidebarExpanded] = useState(open);
 
   const appBarStyles = {
@@ -57,7 +55,7 @@ const TopBar: FC<ITopBar> = ({
     transition: "width 1.5s ease", // Add a transition effect for a smoother change
   };
   useEffect(() => {
-    console.log = console.warn = console.error = () => { };
+    console.log = console.warn = console.error = () => {};
   }, []);
   return (
     <CustomTopbar

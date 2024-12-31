@@ -1,5 +1,5 @@
 import { FC } from "react";
-import ImageNA from "../../assets/ImageNA.svg";
+import ImageNA from "./assets/ImageNA.svg";
 import { Box, Stack, Typography } from "@mui/material";
 interface IContainerTitle {
   icon: string;
