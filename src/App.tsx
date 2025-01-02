@@ -6,6 +6,7 @@ import TextFieldComponent from "./components/TextField/__docs__/Example";
 import ProgressContainerExample from "./components/ProgressContainer/__docs__/Example";
 import ProgressCardExample from "./components/ProgressCard/__docs__/Example";
 import { Stack, TitleBar, TopBar } from "./components";
+import AutoCompleteExample from "./components/AutoCompleteTextField/__docs__/Example";
 import Example from "./components/Dialogue/__docs__/Example";
 import FilterComponent from "./components/MesDataGridFilter/__docs__/Example";
 import SnackbarCheck from "./components/MesSnackbarStacks/__docs__/Example";
@@ -49,8 +50,11 @@ const App: React.FC<Props> = () => {
           {/* Render Other components here */}
           {/* <h2>Progress container</h2> */}
 
-          <ExampleProgressContainer />
+          {/* <ExampleProgressContainer /> */}
 
+          {/* Autocomplete */}
+          <h2>Autocomplete</h2>
+          <AutoCompleteExample />
           {/*  */}
           <h2>TextField</h2>
           {/* <TextFieldComponent /> */}
@@ -68,7 +72,8 @@ const App: React.FC<Props> = () => {
 
           {/* snackbar check */}
           <h2>SnackbarCheck</h2>
-          <SnackbarCheck />
+          {/* <SnackbarCheck /> */}
+
         </Stack>
       </div>
     </div>

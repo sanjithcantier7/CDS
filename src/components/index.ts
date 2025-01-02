@@ -15,6 +15,7 @@ export { default as MesSnackbarContext } from "./MesSnackbarStacks/MesSnackbarCo
 export { default as MesSnackbarProvider } from "./MesSnackbarStacks/MesSnackbarProvider";
 export { default as useMesSnackbarContext } from "./MesSnackbarStacks/useMesSnackbarContext";
 export { default as ContainerTitle } from "./ContainerTitle";
+export { default as AutoCompleteTextField } from "./AutoCompleteTextField";
 
 export * from "@mui/material";
 export * from "@mui/utils";
