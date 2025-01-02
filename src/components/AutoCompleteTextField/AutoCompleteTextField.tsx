@@ -18,6 +18,7 @@ interface IAutoCompleteTextField {
   inputRef?: any | undefined;
   placeholder?: string;
   width?: number | string;
+  fullWidth?: boolean;
 }
 
 const AutoCompleteTextField: FC<IAutoCompleteTextField> = ({
@@ -33,6 +34,7 @@ const AutoCompleteTextField: FC<IAutoCompleteTextField> = ({
   autoFocus,
   autoComplete,
   inputRef,
+  fullWidth,
 }) => {
   useEffect(() => {
     console.log = console.warn = console.error = () => {};
@@ -46,6 +48,7 @@ const AutoCompleteTextField: FC<IAutoCompleteTextField> = ({
       options={options}
       inputValue={inputValue}
       onInputChange={onInputChange}
+      fullWidth={fullWidth}
       sx={{
         ".MuiAutocomplete-clearIndicator": {
           visibility: value ? "visible" : "hidden",
