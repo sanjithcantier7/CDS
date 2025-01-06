@@ -5,7 +5,7 @@ import DataGrid from "./components/MesDataGrid/__docs__/Example";
 import TextFieldComponent from "./components/TextField/__docs__/Example";
 import ProgressContainerExample from "./components/ProgressContainer/__docs__/Example";
 import ProgressCardExample from "./components/ProgressCard/__docs__/Example";
-import { Stack, TitleBar, TopBar } from "./components";
+import { Stack, MesTitleBar, MesTopBar } from "./components";
 import AutoCompleteExample from "./components/AutoCompleteTextField/__docs__/Example";
 import Example from "./components/Dialogue/__docs__/Example";
 import FilterComponent from "./components/MesDataGridFilter/__docs__/Example";
@@ -17,7 +17,7 @@ interface Props {}
 const App: React.FC<Props> = () => {
   return (
     <div>
-      <TitleBar
+      <MesTitleBar
         version={"MES x.0"}
         notification
         info
@@ -25,7 +25,7 @@ const App: React.FC<Props> = () => {
         // moduleOnclick={handleModuleClick}K
       />
 
-      <TopBar
+      <MesTopBar
         open={false}
         // leftComponents={ }
         // RightComponents={
