@@ -6,7 +6,7 @@ import { SvgIconComponent } from "@mui/icons-material";
 
 type IProgressContainerProps = {
   variant: "standard" | "tabs";
-  icon?: any;
+  icon?: ReactNode | undefined;
   label: string;
   description: string;
   children: ReactNode | ReactNode[];

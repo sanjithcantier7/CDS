@@ -51,7 +51,7 @@ export interface IChildMenuList {
     color: string;
     bgColor: string;
     label: string;
-    icon: undefined | any;
+    icon: ReactNode | undefined | any;
     hoverIcon: undefined | any;
     activeIcon: undefined | any;
     isActive: boolean;
