@@ -42,8 +42,8 @@ const ProgressContainer: FC<IProgressContainerProps> = ({
             alignItems: "center",
           }}
         >
-          {/* <img src={icon || ImageNA} style={{ height: "3.5vh" }} /> */}
-          <ImageNA />
+          <img src={icon || ImageNA} style={{ height: "3.5vh" }} />
+          {/* <ImageNA /> */}
         </Box>
         <Stack
           sx={{
