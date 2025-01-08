@@ -1,10 +1,12 @@
 import { Box, Stack, Typography } from "@mui/material";
 import React, { FC, ReactNode } from "react";
 import ImageNA from "./assets/ImageNA.svg";
+import { ReactJSXElement } from "@emotion/react/types/jsx-namespace";
+import { SvgIconComponent } from "@mui/icons-material";
 
 type IProgressContainerProps = {
   variant: "standard" | "tabs";
-  icon?: string;
+  icon?: ReactNode | ReactJSXElement | SvgIconComponent;
   label: string;
   description: string;
   children: ReactNode | ReactNode[];
@@ -42,8 +44,8 @@ const ProgressContainer: FC<IProgressContainerProps> = ({
             alignItems: "center",
           }}
         >
-          <img src={icon || ImageNA} style={{ height: "3.5vh" }} />
-          {/* <ImageNA /> */}
+          {/* <img src={icon || ImageNA} style={{ height: "3.5vh" }} /> */}
+          {icon || <ImageNA />}
         </Box>
         <Stack
           sx={{
