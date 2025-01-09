@@ -90,7 +90,7 @@ const MesTab: FC<IMesTab> = ({ label, onClick, index, value, disabled, ...rest }
         fontWeight: 600,
         letterSpacing: "0.1px",
       }}
-      onClick={disabled ? handleClick : () => { }}
+      onClick={!disabled ? handleClick : () => { }}
       {...a11yProps(index)}
       {...rest}
       sx={{
