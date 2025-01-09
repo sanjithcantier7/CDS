@@ -66,14 +66,13 @@ const App: React.FC<Props> = () => {
           <h2>Dialogue Component</h2>
           {/* <Example /> */}
           {/* <h2>Progress Container</h2> */}
-          {/* <ProgressContainerExample /> */}
+          <ProgressContainerExample />
           {/* Progress Card */}
           <ProgressCardExample />
 
           {/* snackbar check */}
           <h2>SnackbarCheck</h2>
           {/* <SnackbarCheck /> */}
-
         </Stack>
       </div>
     </div>

@@ -22,6 +22,7 @@ const Example = () => {
           index={0}
           value={value}
           onClick={handleChange}
+          disabled
         />
         {/* tools */}
         <MesTab

@@ -6,6 +6,7 @@ interface IMesTab extends Omit<TabProps, "onClick" | "label"> {
   index: number;
   onClick?: (event: React.MouseEvent<HTMLDivElement>, index: number) => void;
   value: number;
+  disabled?: boolean
 }
 
 function a11yProps(index: number) {
@@ -33,7 +34,7 @@ const StyledTab = styled(Tab)(({ theme }) => ({
   },
 }));
 
-const MesTab: FC<IMesTab> = ({ label, onClick, index, value, ...rest }) => {
+const MesTab: FC<IMesTab> = ({ label, onClick, index, value, disabled, ...rest }) => {
   const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
     if (onClick) {
       onClick(event, index);
@@ -89,13 +90,14 @@ const MesTab: FC<IMesTab> = ({ label, onClick, index, value, ...rest }) => {
         fontWeight: 600,
         letterSpacing: "0.1px",
       }}
-      onClick={handleClick}
+      onClick={disabled ? handleClick : () => { }}
       {...a11yProps(index)}
       {...rest}
       sx={{
-        cursor:"default",
-        mx:1,
+        cursor: "default",
+        mx: 1,
         mt: 4,
+        opacity: disabled ? 0.4 : 1,
         textTransform: "capitalize",
         color: value === index ? "#4376AF" : "#808080",
         backgroundColor: value === index ? "#FFF" : "#FFF",

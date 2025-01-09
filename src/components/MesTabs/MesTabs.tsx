@@ -24,7 +24,6 @@ const MesTabs: FC<IMesTabs> = ({ children }) => {
         sx={{
           //   boxShadow: "0px 0.5px 18px rgba(0, 0, 0, 0.15)",
           backgroundColor: "#FFF",
-
         }}
       >
         {children}
