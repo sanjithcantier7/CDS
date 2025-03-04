@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import IconButton from "@mui/material/IconButton";
 
 export type ButtonSize = "small" | "medium" | "large";
 
