@@ -17,7 +17,13 @@ const App: React.FC = () => {
   ];
 
   return (
-    <FluentProvider theme={webLightTheme}>
+    <FluentProvider
+      theme={{
+        ...webLightTheme,
+        colorCompoundBrandStroke: "#F15D22",
+        colorCompoundBrandStrokeHover: "#F15D22",
+      }}
+    >
       <div>
         <CdsDropDown label="Select an option" options={sampleOptions} />
       </div>

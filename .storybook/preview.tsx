@@ -25,7 +25,13 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <FluentProvider theme={webLightTheme}>
+      <FluentProvider
+        theme={{
+          ...webLightTheme,
+          colorCompoundBrandStroke: "#F15D22",
+          colorCompoundBrandStrokeHover: "#F15D22",
+        }}
+      >
         {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
         <div style={{}}>{Story()}</div>
       </FluentProvider>
