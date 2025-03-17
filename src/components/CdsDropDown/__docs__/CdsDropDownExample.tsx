@@ -1,8 +1,9 @@
 import React from "react";
 import CdsDropDown from "../CdsDropDown";
-import withFluentProvider from "../../../hoc/FluentProviderHOC";
 
-const CdsDropDownExample = () => {
+type Props = {};
+
+const CdsDropDownExample = (props: Props) => {
   const options = [
     { id: "1", label: "Red" },
     { id: "2", label: "Blue" },
@@ -12,4 +13,4 @@ const CdsDropDownExample = () => {
   return <CdsDropDown label="Choose a color" options={options} />;
 };
 
-export default withFluentProvider(CdsDropDownExample);
+export default CdsDropDownExample;

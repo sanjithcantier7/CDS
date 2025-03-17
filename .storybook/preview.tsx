@@ -15,7 +15,7 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: "white", // Set default background color
+      default: "white",
       values: [
         { name: "white", value: "#f4f4f4" },
         { name: "lightgray", value: "#f4f4f4" },
@@ -32,8 +32,7 @@ const preview: Preview = {
           colorCompoundBrandStrokeHover: "#F15D22",
         }}
       >
-        {/* 👇 Decorators in Storybook also accept a function. Replace <Story/> with Story() to enable it  */}
-        <div style={{}}>{Story()}</div>
+        <div style={{ padding: '20px', minHeight: '100vh' }}>{Story()}</div>
       </FluentProvider>
     ),
   ],
