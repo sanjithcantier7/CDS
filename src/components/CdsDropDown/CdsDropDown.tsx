@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useMemo } from "react";
 import { Dropdown, Option, makeStyles } from "@fluentui/react-components";
 
 interface OptionType {
@@ -12,6 +12,7 @@ interface IProps {
   disabled?: boolean;
   multiselect?: boolean;
   size?: "small" | "medium" | "large";
+  onSelectionChange?: (selectedOptions: string[]) => void;
 }
 
 const useStyles = makeStyles({
@@ -44,14 +45,35 @@ const dropdownSizes = {
   large: "400px",
 };
 
-const CdsDropDown = ({
+const CdsDropDown: React.FC<IProps> = ({
   label,
   options,
-  disabled,
+  disabled = false,
   multiselect = false,
-  size = "medium", // Default size is medium
-}: IProps) => {
+  size = "medium",
+  onSelectionChange,
+}) => {
   const styles = useStyles();
+  const [selectedOptions, setSelectedOptions] = useState<string[]>([]);
+
+  const memoizedOptions = useMemo(
+    () =>
+      options.map((option) => (
+        <Option key={option.id} value={option.id}>
+          {option.label}
+        </Option>
+      )),
+    [options],
+  );
+
+  const handleSelectionChange = (e: any, data: any) => {
+    const newSelectedOptions = data.selectedOptions || [];
+    setSelectedOptions(newSelectedOptions);
+
+    if (onSelectionChange) {
+      onSelectionChange(newSelectedOptions);
+    }
+  };
 
   return (
     <div className={styles.root}>
@@ -59,16 +81,14 @@ const CdsDropDown = ({
         {label && <label className={styles.label}>{label}</label>}
         <Dropdown
           className={styles.dropdown}
-          style={{ width: dropdownSizes[size] }} // Apply width dynamically
+          style={{ width: dropdownSizes[size] }}
           disabled={disabled}
           clearable={true}
           multiselect={multiselect}
+          selectedOptions={selectedOptions}
+          onOptionSelect={handleSelectionChange}
         >
-          {options.map((option) => (
-            <Option key={option.id} value={option.id}>
-              {option.label}
-            </Option>
-          ))}
+          {memoizedOptions}
         </Dropdown>
       </div>
     </div>
