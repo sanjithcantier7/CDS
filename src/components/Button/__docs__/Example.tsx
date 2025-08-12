@@ -1,6 +1,6 @@
 import React from "react";
 import Button from "../Button";
-// import MesInfoIcon from "../Button/ViewLogIcon.svg";
+import MesInfoIcon from "../ViewLogIcon.svg";
 
 const Example = () => {
   return (
@@ -27,9 +27,9 @@ const Example = () => {
         size="large"
       />
 
-      {/* <Button
+      <Button
         style={{ margin: "10px" }}
-        // icon={<MesInfoIcon />}
+        icon={<MesInfoIcon />}
         variant="custom"
         label="Edit"
         onClick={() => {}}
@@ -49,7 +49,7 @@ const Example = () => {
         label="View Log"
         onClick={() => {}}
         size="large"
-      /> */}
+      />
     </div>
   );
 };

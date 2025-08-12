@@ -20,8 +20,7 @@
     "access": "public"
   },
   "scripts": {
-    "start": "vite",
-    "storybook": "storybook dev -p 6006",
+    "dev": "vite",
     "build": "tsc && vite build",
     "prepare": "npm run build",
     "preview": "vite preview",
@@ -30,10 +29,15 @@
     "test:ui": "vitest --ui",
     "lint": "eslint . --ext .ts,.tsx --ignore-path .gitignore --fix",
     "format": "prettier --write --parser typescript '**/*.{ts,tsx}'",
+    "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@fluentui/react-components": "^9.60.0",
+    "@emotion/react": "11.13.5",
+    "@emotion/styled": "11.13.5",
+    "@mui/icons-material": "6.1.8",
+    "@mui/material": "6.1.8",
+    "@mui/x-data-grid": "^7.23.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.54.2"
